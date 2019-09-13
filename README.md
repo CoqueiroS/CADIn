@@ -1,2 +1,3 @@
-# CADIn
-Chromosomal Amplification and Delition Inference
+# **CADIn**
+### Chromosomal Amplification and Delition Inference
+###### Coqueiro-dos-Santos
