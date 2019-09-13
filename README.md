@@ -18,12 +18,9 @@ Perl Modules
 
 BEDTools and R (instalation)
 
-To CentOS 7 / Fedora / Red Hat
-BEDTools -> sudo yum install BEDTools
-R -> sudo yum install R
-If not found run 'sudo yum install epel-release' before
 
-### Debian/Mint/Ubuntu
+
+### Debian / Mint / Ubuntu
 **BCFTools**
 >sudo apt-get install bcftools
 
@@ -36,8 +33,14 @@ If not found run 'sudo yum install epel-release' before
 **R**
 >sudo apt-get install r-base
 
+### CentOS 7 / Fedora / Red Hat
+**BEDTools**
+>sudo yum install BEDTools
 
+**R**
+>sudo yum install R
 
+###### *If not found run `'sudo yum install epel-release'` before*
 
 Install Dependences
 
