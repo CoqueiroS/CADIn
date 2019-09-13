@@ -29,7 +29,7 @@ Perl Modules
 **R**
 >sudo apt-get install r-base
 
-### CentOS 7 / Fedora / Red Hat
+### CentOS / Fedora / Red Hat
 **BEDTools**
 >sudo yum install BEDTools
 
@@ -38,7 +38,7 @@ Perl Modules
 
 ###### *If not found run `'sudo yum install epel-release'` before*
 
-### General
+### Othres
 
 BCFTools and SAMTools (version 1.9)
 Page: http://www.htslib.org/download/
