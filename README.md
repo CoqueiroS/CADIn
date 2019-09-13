@@ -47,7 +47,8 @@ Perl Modules
 
 >[Samtools v1.9](https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2)
 
-
+**Install tools**
+```
 wget link
 tar -xvf *tools-1.9.tar.bz2
 
@@ -57,3 +58,6 @@ make
 make install
 
 export PATH=/where/to/install/bin:$PATH
+```
+
+
