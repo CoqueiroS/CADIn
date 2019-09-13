@@ -14,11 +14,7 @@ Description description description description description description descript
 Perl Modules
 - Statistics::R
 
-## Instalation
-
-BEDTools and R (instalation)
-
-
+## Installing dependencies
 
 ### Debian / Mint / Ubuntu
 **BCFTools**
@@ -42,7 +38,7 @@ BEDTools and R (instalation)
 
 ###### *If not found run `'sudo yum install epel-release'` before*
 
-Install Dependences
+### General
 
 BCFTools and SAMTools (version 1.9)
 Page: http://www.htslib.org/download/
