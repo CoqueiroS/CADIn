@@ -42,10 +42,9 @@ Perl Modules
 #### BCFTools and SAMTools (version 1.9)
 
 Main page: `` http://www.htslib.org/download/ ``
-
-link bcftools ``https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2``
-
-link samtools ``https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2``
+links
+bcftools [https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2]
+samtools [https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2]
 
 
 wget link
