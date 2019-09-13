@@ -38,7 +38,7 @@ Perl Modules
 
 ###### *If not found run `'sudo yum install epel-release'` before*
 
-### Othres
+### Othres (Via Terminal)
 #### BCFTools and SAMTools (version 1.9)
 **Main page:** `` http://www.htslib.org/download/ ``
 
@@ -48,15 +48,23 @@ Perl Modules
 >[Samtools v1.9](https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2)
 
 **Install tools**
+Download by terminal
 ```
-wget link
+wget <put here the link>
+```
+Decompress
+```
 tar -xvf *tools-1.9.tar.bz2
-
+```
+Configure and install
+```
 cd samtools-1.x    # and similarly for bcftools
 ./configure --prefix=/where/to/install
 make
 make install
-
+```
+Preparing to use
+```
 export PATH=/where/to/install/bin:$PATH
 ```
 
