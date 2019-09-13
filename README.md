@@ -1,5 +1,5 @@
 # **CADIn**
-### Chromosomal Amplification and Delition Inference
+Chromosomal Amplification and Delition Inference
 ###### *Coqueiro-dos-Santos, A.*
 
 #### What does CADIn do?
