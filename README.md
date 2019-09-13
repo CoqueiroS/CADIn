@@ -4,16 +4,15 @@
 #### What does CADIn do?
 Description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description.
 
->Dependences
-
-Perl 
-BCFTools (version 1.9)
-BEDTools (2.26 or superior)
-SAMTools (version 1.9)
-R (version 3.4 or superior)
+### Dependences
+- Perl
+- BCFTools (version 1.9)
+- BEDTools (2.26 or superior)
+- SAMTools (version 1.9)
+- R (version 3.4 or superior)
 
 Perl Modules
-Statistics::R
+- Statistics::R
 
 Instalation
 
