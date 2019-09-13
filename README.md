@@ -51,7 +51,7 @@ Perl Modules
 
 Download by terminal
 ```
-wget <put here the link>
+wget <insert link here>
 ```
 Decompress
 ```
@@ -59,7 +59,7 @@ tar -xvf *tools-1.9.tar.bz2
 ```
 Configure and install
 ```
-cd samtools-1.x    # and similarly for bcftools
+cd bcftools-1.x or cd samtools-1.x
 ./configure --prefix=/where/to/install
 make
 make install
