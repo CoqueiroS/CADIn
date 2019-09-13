@@ -26,10 +26,13 @@ If not found run 'sudo yum install epel-release' before
 ### Debian/Mint/Ubuntu
 **BCFTools**
 >sudo apt-get install bcftools
+
 **BEDTools**
 >sudo apt-get install bedtools
+
 **SAMTools**
 >sudo apt-get install samtools
+
 **R**
 >sudo apt-get install r-base
 
