@@ -43,8 +43,8 @@ Perl Modules
 
 Main page: `` http://www.htslib.org/download/ ``
 links
-bcftools [https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2]
-samtools [https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2]
+[BCFTools v1.9](https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2)
+[Samtools v1.9](https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2)
 
 
 wget link
