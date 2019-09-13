@@ -23,19 +23,19 @@ BEDTools -> sudo yum install BEDTools
 R -> sudo yum install R
 If not found run 'sudo yum install epel-release' before
 
-To Ubuntu 18.04
+#### Debian/Mint/Ubuntu
 
-BEDTools
-sudo apt-get install bedtools
+**BEDTools**
+>sudo apt-get install bedtools
 
-R
-sudo apt-get install r-base
+**R**
+>sudo apt-get install r-base
 
-BCFTools
-sudo apt-get install bcftools
+**BCFTools**
+>sudo apt-get install bcftools
 
-SAMTools
-sudo apt-get install samtools
+**SAMTools**
+>sudo apt-get install samtools
 
 Install Dependences
 
