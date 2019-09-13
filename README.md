@@ -3,7 +3,7 @@
 ###### Coqueiro-dos-Santos, A.
 
 Dependences
-------------------------------------------------
+
 Perl 
 BCFTools (version 1.9)
 BEDTools (2.26 or superior)
@@ -14,30 +14,30 @@ Perl Modules
 Statistics::R
 
 Instalation
----------------------------------------------------
+
 BEDTools and R (instalation)
------
+
 To CentOS 7 / Fedora / Red Hat
 BEDTools -> sudo yum install BEDTools
 R -> sudo yum install R
 If not found run 'sudo yum install epel-release' before
------
+
 To Ubuntu 18.04
 
 BEDTools
 sudo apt-get install bedtools
--
+
 R
 sudo apt-get install r-base
--
+
 BCFTools
 sudo apt-get install bcftools
--
+
 SAMTools
 sudo apt-get install samtools
 
 Install Dependences
-------------------------------------------------
+
 BCFTools and SAMTools (version 1.9)
 Page: http://www.htslib.org/download/
 bcftools -> https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2
