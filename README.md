@@ -60,7 +60,7 @@ tar -xvf *tools-1.9.tar.bz2
 ```
 Configure and install
 ```
-cd bcftools-1.x or cd samtools-1.x
+cd <directory>
 ./configure --prefix=/where/to/install
 make
 make install
