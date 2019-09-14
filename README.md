@@ -79,5 +79,4 @@ export PATH=/where/to/install/bin:$PATH
 **Main page:** `` r-project.org ``
 >[R v3.6](https://cloud.r-project.org/src/base/R-3/R-3.6.1.tar.gz)
 
-Installing
-`*For this sofwares you use the same step expleined above (BCFTools and SAMTools).*`
+*Installing: `For this sofwares you use the same step expleined above (BCFTools and SAMTools).`*
