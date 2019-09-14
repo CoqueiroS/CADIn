@@ -39,9 +39,9 @@ Perl Modules
 ###### *If not found run `'sudo yum install epel-release'` before*
 
 ### Othres (Via Terminal)
-You can try install the softwares bcftools and samtools by command line once the same systems have old versions or don't has it.
+You can try install the softwares bcftools and samtools by command line, once the systems can have old versions or don't has it.
 #### BCFTools and SAMTools (version 1.9)
-**Main page:** `` http://www.htslib.org/download/ ``
+**Main page:** `` htslib.org ``
 
 **Links to softwares**
 >[BCFTools v1.9](https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2)
@@ -70,4 +70,14 @@ Preparing to use
 export PATH=/where/to/install/bin:$PATH
 ```
 
+#### Othres softwares
+**BEDTools**
+**Main page:** `` bedtools.readthedocs.io ``
+>[BEDTools v2.28](https://github.com/arq5x/bedtools2/releases/download/v2.28.0/bedtools-2.28.0.tar.gz)
 
+**R**
+**Main page:** `` r-project.org ``
+>[R v3.6](https://cloud.r-project.org/src/base/R-3/R-3.6.1.tar.gz)
+
+Installing
+`*For this sofwares you use the same step expleined above (BCFTools and SAMTools).*`
