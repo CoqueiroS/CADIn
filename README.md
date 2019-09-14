@@ -2,7 +2,7 @@
 ###### *Coqueiro-dos-Santos, A.*
 #
 ### What means CADIn?
-CADIn is a softwares free (open source) that permit to search allelic differences in NGS (next generation sequences) data.
+CADIn is a softwares free (open source) that permit to search allelic differences in NGS (next generation sequences) data. This tool estimate ploidy level  for each chromosomes in individuo. For this, it calculate the allelic frequency based in single nucleotide variants and depth reads in regions annotated, like: genes, CDSs, exon and so on.
 
 ### Dependences
 - Perl
