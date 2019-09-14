@@ -1,8 +1,8 @@
 # **CADIn** - Chromosomal Amplification and Delition Inference
 ###### *Coqueiro-dos-Santos, A.*
 #
-### What does CADIn do?
-Description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description description.
+### What means CADIn?
+CADIn is a softwares free (open source) that permit to search allelic differences in NGS (next generation sequences) data.
 
 ### Dependences
 - Perl
