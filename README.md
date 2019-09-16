@@ -143,9 +143,9 @@ The standard output of the CADIn is divided in 4 folders.
 	- *wilcox.Cov.csv*
 		- Statistical informations of the wilcox tests. 
 	- *coverage/*
-		- Boxplots pictures referente the aneuploids analysis for each sample and chromosome.
+		- Folder where are saved Boxplots pictures referente the aneuploids analysis for each sample and chromosome.
 	- *frequency/*
-		- Barplot graphics with frenquency count of the heterozygous single nucleotide variants.
+		- Folder where are saved all Barplot graphics with frenquency count of the heterozygous single nucleotide variants.
 
 ### Arguments
 ```
