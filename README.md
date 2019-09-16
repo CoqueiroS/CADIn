@@ -100,7 +100,7 @@ There are two packages (ggplot2 and outliers). Both are instaled from the CADIn.
 install.packages("<insert package name here>")
 ```
 ## Working with CADIn
-### Prepating
+### Preparing
 Making user-friendly
 1. Makes executable
 ```
