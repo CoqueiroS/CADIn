@@ -137,10 +137,10 @@ The standard output of the CADIn is divided in 4 folders.
 
 When all analysed files are.
 
-*combineCoverage.csv*
+>combineCoverage.csv
 - Tabular file with coverage data. It has the coverage proportion of the annotated region and its depth.
 
-*frequencySNPs.csv*
+>frequencySNPs.csv
 - Frequency of the heterozygous single nucleotide variants by chromosome.
 
 *normalized.Cov.csv*
