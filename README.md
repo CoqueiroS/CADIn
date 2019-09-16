@@ -175,8 +175,10 @@ The standard output of the CADIn is divided in 4 folders.
 ```
 **Mapping Quality**
 The flag `-q` is used to filter reads for quality. CADIn doesn't filter in standard mode, this is to reduce process time in cases when the BAM files had been filtered yet. Then, if the BAM file not filtered it can be used.
+
 **Annotated regions**
 GFF file has different informations about annotation. Although this informations were importants only one can be used for analyses. We recommend those region the best covers the chromosome/genome. Due this was used `-f gene` like standard.
+
 **Temporary directory**
 CADIn will be to create a directory in the same path where it's installed. However, you can find problems with permission or low space to save the temporary files. So, thougth of the flag `-s` the directory can be alterated.
 
