@@ -124,36 +124,34 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ### Results
 The standard output of the CADIn is divided in 4 folders.
 
-**genomecov/**
-- Read coverage at each position on chromosomes.
+- **genomecov/**
+	- Read coverage at each position on chromosomes.
 
-**genescov/**
-- Read coverage in selected regions of the annotation file.
+- **genescov/**
+	- Read coverage in selected regions of the annotation file.
 
-**vcf/**
-- File in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
+- **vcf/**
+	- File in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
 
-**statistical/**
+- **statistical/**
+	- When all analysed files are.
+	- *combineCoverage.csv*
+		- Tabular file with coverage data. It has the coverage proportion of the annotated region and its depth.
 
-When all analysed files are.
+	- *frequencySNPs.csv*
+		- Frequency of the heterozygous single nucleotide variants by chromosome.
 
-- *combineCoverage.csv*
-	- Tabular file with coverage data. It has the coverage proportion of the annotated region and its depth.
+	- *normalized.Cov.csv*
+		- Table with normalized depth values by grubs test.
 
-*frequencySNPs.csv*
-- Frequency of the heterozygous single nucleotide variants by chromosome.
+	- *wilcox.Cov.csv*
+		- Statistical informations of the wilcox tests. 
 
-*normalized.Cov.csv*
-- Table with normalized depth values by grubs test.
+	- *coverage/*
+		- Boxplots pictures referente the aneuploids analysis for each sample and chromosome.
 
-*wilcox.Cov.csv*
-- Statistical informations of the wilcox tests. 
-
-*coverage/*
-- Boxplots pictures referente the aneuploids analysis for each sample and chromosome.
-
-*frequency/*
-- Barplot graphics with frenquency count of the heterozygous single nucleotide variants.
+	- *frequency/*
+		- Barplot graphics with frenquency count of the heterozygous single nucleotide variants.
 
 ### Arguments
 ```
