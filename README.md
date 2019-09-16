@@ -51,13 +51,9 @@ You can try install the softwares bcftools and samtools by command line, once th
 **Install tools**
 
 Download by terminal
-```
-wget <insert link here>
-```
+>wget <insert link here>
 Decompress
-```
-tar -xvf *tools-1.9.tar.bz2
-```
+>tar -xvf *tools-1.9.tar.bz2
 Configure and install
 ```
 cd <directory>
@@ -124,16 +120,16 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ### Results
 The standard output of the CADIn is divided in 4 folders.
 
->genomecov/
+**genomecov/**
 - Read coverage at each position on chromosomes.
 
->genescov/
+**genescov**
 - Read coverage in selected regions of the annotation file.
 
->vcf/
+**vcf**
 - File in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
 
->**statistical/**
+**statistical/**
 
 When all analysed files are.
 
