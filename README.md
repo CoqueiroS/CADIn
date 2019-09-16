@@ -136,6 +136,7 @@ The standard output of the CADIn is divided in 4 folders.
 **statistical**
 
 When all analysed files are.
+
 *combineCoverage.csv*
 - Tabular file with coverage data. It has the coverage proportion of the annotated region and its depth.
 *frequencySNPs.csv*
