@@ -1,5 +1,6 @@
 # **CADIn** - Chromosomal Amplification and Delition Inference
 ###### *Coqueiro-dos-Santos, A.*
+###### *Citation*
 #
 ### What means CADIn?
 CADIn is a softwares free (open source) and developed to unix systems (e.i. linux) that permit to search allelic differences in NGS (next generation sequences) data. This tool estimate ploidy level  for each chromosomes in individuo. For this, it calculate the allelic frequency based in single nucleotide variants and, furthermore, analyse depth reads in regions annotated with good coverage, like: genes, CDSs, exon and so on.
