@@ -119,7 +119,7 @@ To run is necessary 3 files.
 
 **Basic command line**
 ```
-CADIn -i FILE.bam REFERENCE.fasta ANNOTATION.gff
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
 ### Arguments
 ```
