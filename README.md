@@ -131,15 +131,21 @@ The standard output of the CADIn is divided in 4 folders.
 - Read coverage in selected regions of the annotation file.
 
 **vcf/**
-- File(s) in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
+- File in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
 
 **statistical**
-	combineCoverage.csv	Arquivo tabular compilando dados de cobertura da(s) amostra(s). Ele possui proporção da regição anotada que é coberta e a depth.
-	frequencySNPs.csv	Frequencia de multações pontuais heterozigóticas,
-	normalized.Cov.csv	Tabela com valores normalizados por grubs test
-	wilcox.Cov.csv		Informação statisticos dos testes de wilcox realizados. 
-	statistical/coverage	Boxplots com analises de anauplodias para asmostras e cromossomos.
-	statistical/frequency	Graficos de barras com a contagem das frequencias de SNPs heterozigoticos.
+When all analysed files are.
+*combineCoverage.csv*
+- Arquivo tabular compilando dados de cobertura da(s) amostra(s). Ele possui proporção da regição anotada que é coberta e a depth.
+*frequencySNPs.csv*
+- Frequencia de multações pontuais heterozigóticas,
+*normalized.Cov.csv*
+- Tabela com valores normalizados por grubs test
+*wilcox.Cov.csv*
+- Informação statisticos dos testes de wilcox realizados. 
+
+statistical/coverage	Boxplots com analises de anauplodias para asmostras e cromossomos.
+statistical/frequency	Graficos de barras com a contagem das frequencias de SNPs heterozigoticos.
 
 
 ### Arguments
