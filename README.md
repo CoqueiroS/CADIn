@@ -174,10 +174,10 @@ The standard output of the CADIn is divided in 4 folders.
 ## Licence
 >[GNU General Public License v3.0](https://github.com/coqueiro-dos-santos/CADIn/blob/master/LICENSE.txt)
 ## Author
-Name: Anderson Coqueiro-dos-Santos
+**Name:** Anderson Coqueiro-dos-Santos
 
-E-mail: andersoncoqueiro8@gmail.com
+**E-mail:** andersoncoqueiro8@gmail.com
 
-Github: github.com/coqueiro-dos-santos
+**Github:** github.com/coqueiro-dos-santos
 
-Mendeley: mendeley.com/profiles/anderson-coqueiro-dos-santos2
+**Mendeley:** mendeley.com/profiles/anderson-coqueiro-dos-santos2
