@@ -97,7 +97,7 @@ There are two packages (ggplot2 and outliers). Both are instaled from the CADIn.
 install.packages("<insert package name here>")
 ```
 ## Working with CADIn
-### Running
+### Prepating
 Making user-friendly
 1. Makes executable
 ```
@@ -111,6 +111,11 @@ or
 export PATH=/<CADIn directory>/:$PATH
 ```
 *`You need specify the complete path to CADIn.`*
+### Runing
+To run is necessary 3 files.
+- BAM format file or directory with BAM file(s).
+- FASTA format file where reads were mapped used like reference for BAM file(s).
+- GFF format file referent the reference genome.
 
 ### Arguments
 ```
