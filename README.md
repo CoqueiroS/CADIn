@@ -133,20 +133,25 @@ The standard output of the CADIn is divided in 4 folders.
 **vcf/**
 - File in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
 
-**statistical**
+**statistical/**
 
 When all analysed files are.
 
 *combineCoverage.csv*
 - Tabular file with coverage data. It has the coverage proportion of the annotated region and its depth.
+
 *frequencySNPs.csv*
 - Frequency of the heterozygous single nucleotide variants by chromosome.
+
 *normalized.Cov.csv*
 - Table with normalized depth values by grubs test.
+
 *wilcox.Cov.csv*
 - Statistical informations of the wilcox tests. 
+
 *coverage/*
 - Boxplots pictures referente the aneuploids analysis for each sample and chromosome.
+
 *frequency/*
 - Barplot graphics with frenquency count of the heterozygous single nucleotide variants.
 
