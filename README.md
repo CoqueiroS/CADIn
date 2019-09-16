@@ -15,7 +15,7 @@ CADIn is a softwares free (open source) and developed to unix systems (e.i. linu
 Perl Modules
 - Statistics::R
 
-### **Installing dependencies**
+## Installing dependencies
 
 ### Debian / Mint / Ubuntu
 **BCFTools**
