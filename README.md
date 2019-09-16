@@ -121,6 +121,23 @@ To run is necessary 3 files.
 ```
 CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
+### Results
+The standard output of the CADIn is divided in 4 folders.
+- genomecov/
+	Cobertura de reads em cada uma das posições nos cromossomos
+- genescov/
+	Cobertura das reads nas regioes selecionadas na anotação
+- vcf/
+	Arquivo em variante call format (VCF) com as variants pontuais encontradas no(s) cromossomo(s).
+- statistical
+	combineCoverage.csv	Arquivo tabular compilando dados de cobertura da(s) amostra(s). Ele possui proporção da regição anotada que é coberta e a depth.
+	frequencySNPs.csv	Frequencia de multações pontuais heterozigóticas,
+	normalized.Cov.csv	Tabela com valores normalizados por grubs test
+	wilcox.Cov.csv		Informação statisticos dos testes de wilcox realizados. 
+	statistical/coverage	Boxplots com analises de anauplodias para asmostras e cromossomos.
+	statistical/frequency	Graficos de barras com a contagem das frequencias de SNPs heterozigoticos.
+
+
 ### Arguments
 ```
 --- Parameters ---------------------
