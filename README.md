@@ -83,13 +83,17 @@ export PATH=/where/to/install/bin:$PATH
 
 #### Modules and Packages
 **Statistics::R**
+
 **Main page:** `` metacpan.org/pod/Statistics::R ``
+
 Usually modules are automatically detected. However, if not you need to install from the terminal.
 ```
 sudo cpan install Statistics::R
 ```
 **R - Packages**
+
 There are two packages (ggplot2 and outliers). Both are instaled from the CADIn.
+
 They can be installed before. For this, open the R (software).
 ```
 install.packages("<insert package name here>")
