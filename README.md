@@ -106,7 +106,7 @@ chmod +x ./CADIn
 ```
 2. Easy acess
 ```
-alias CADIn='/<path to CADIn>/CADIn/./CADIn'
+alias CADIn='/<path to CADIn>/./CADIn'
 or
 export PATH=/<CADIn directory>/:$PATH
 ```
