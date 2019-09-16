@@ -169,4 +169,7 @@ The standard output of the CADIn is divided in 4 folders.
 	-g  Graphics generate with R: yes (1) or not (0) (default -g 1) (require '-u 1').
 ------------------------------------
 ```
+## Citation
+## Licence
 
+## Author
