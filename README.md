@@ -185,6 +185,10 @@ GFF file has different informations about annotation. Although this informations
 
 CADIn will be to create a directory in the same path where it's installed. However, you can find problems with permission or low space to save the temporary files. So, thougth the flag `-s` the directory can be alterated.
 
+**Directory with results**
+
+The software has the standard output directory `result_CADIn/`. With `-o` 
+
 ## Citation
 *Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
 ## Licence
