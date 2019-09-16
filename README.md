@@ -134,6 +134,7 @@ The standard output of the CADIn is divided in 4 folders.
 - File in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
 
 **statistical**
+
 When all analysed files are.
 *combineCoverage.csv*
 - Tabular file with coverage data. It has the coverage proportion of the annotated region and its depth.
