@@ -160,7 +160,7 @@ The standard output of the CADIn is divided in 4 folders.
 --- Advanced Options ---------------
 	-q  Filter input(s) by mapping quality [INT] (default -q 0).
 	-f  Annotated region to be filtered ('gene', 'CDS', 'mRNA', 'tRNA', 'etc') (default -f gene).
-	-s  Directory to save the temporary files (default -s /home/coqueiro//tmp).
+	-s  Directory to save the temporary files (default -s /tmp).
 	-t  Number of threads to SAMTOOLS run [INT] (default -t 1).
 	-o  Name for your output files (default -o result_CADIn).
 --- Type of analysis ---------------
