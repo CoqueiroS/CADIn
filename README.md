@@ -42,7 +42,7 @@ Perl Modules
 ### Othres (Via Terminal)
 You can try install the softwares bcftools and samtools by command line, once the systems can have old versions or don't has it.
 #### BCFTools and SAMTools (version 1.9)
-**Main page:** `` htslib.org ``
+**Main page:** [``htslib.org``](https://www.htslib.org)
 
 **Links to softwares**
 >[BCFTools v1.9](https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2)
