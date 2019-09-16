@@ -51,9 +51,13 @@ You can try install the softwares bcftools and samtools by command line, once th
 **Install tools**
 
 Download by terminal
->wget <insert link here>
+```
+wget <insert link here>
+```
 Decompress
->tar -xvf *tools-1.9.tar.bz2
+```
+tar -xvf *tools-1.9.tar.bz2
+```
 Configure and install
 ```
 cd <directory>
