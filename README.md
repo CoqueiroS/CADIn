@@ -117,6 +117,10 @@ To run is necessary 3 files.
 - FASTA format file where reads were mapped used like reference for BAM file(s).
 - GFF format file referent the reference genome.
 
+**Basic command line**
+```
+CADIn -i FILE.bam REFERENCE.fasta ANNOTATION.gff
+```
 ### Arguments
 ```
 --- Parameters ---------------------
