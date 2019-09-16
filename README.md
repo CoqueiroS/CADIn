@@ -1,5 +1,5 @@
 # **CADIn** - Chromosomal Amplification and Delition Inference
-###### *Citation: Coqueiro-dos-Santos, A.*
+###### *Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
 
 #
 ### What means CADIn?
@@ -173,7 +173,7 @@ The standard output of the CADIn is divided in 4 folders.
 ------------------------------------
 ```
 ## Citation
-*Citation: Coqueiro-dos-Santos, A.*
+*Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
 ## Licence
 >[GNU General Public License v3.0](https://github.com/coqueiro-dos-santos/CADIn/blob/master/LICENSE.txt)
 ## Author
