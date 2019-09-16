@@ -110,6 +110,8 @@ alias CADIn='/<path to CADIn>/./CADIn'
 or
 export PATH=/<CADIn directory>/:$PATH
 ```
+*`You need specify the complete path to CAD.`*
+
 ### Arguments
 ```
 --- Parameters ---------------------
