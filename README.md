@@ -133,7 +133,7 @@ CADIn -i FILE.bam REFERENCE.fasta ANNOTATION.gff
 	-s  Directory to save the temporary files (default -s /home/coqueiro//tmp).
 	-t  Number of threads to SAMTOOLS run [INT] (default -t 1).
 	-o  Name for your output files (default -o result_CADIn).
---- Type of analysis ---------
+--- Type of analysis ---------------
 	-v  Variant calling analysis (1), or not (0) (default -v 1).
 	-d  Minimum number of reads to confirm each variant [INT] (default -d 5) (require '-v 1').
 	-c  Genome/genes coverage analysis (1), or not (0) (default -c 1).
