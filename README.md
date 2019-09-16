@@ -97,6 +97,19 @@ There are two packages (ggplot2 and outliers). Both are instaled from the CADIn.
 install.packages("<insert package name here>")
 ```
 ## Working with CADIn
+### Running
+Making user-friendly
+1. Makes executable
+```
+cd CADIn
+chmod +x ./CADIn
+```
+2. Easy acess
+```
+alias CADIn='/<path to CADIn>/CADIn/./CADIn'
+or
+export PATH=/<CADIn directory>/:$PATH
+```
 ### Arguments
 ```
 --- Parameters ---------------------
