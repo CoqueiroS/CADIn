@@ -123,12 +123,16 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
 ### Results
 The standard output of the CADIn is divided in 4 folders.
+
 **genomecov/**
-- Cobertura de reads em cada uma das posições nos cromossomos.
+- Read coverage at each position on chromosomes.
+
 **genescov/**
-- Cobertura das reads nas regioes selecionadas na anotação.
+- Read coverage in selected regions of the annotation file.
+
 **vcf/**
-- Arquivo em variante call format (VCF) com as variants pontuais encontradas no(s) cromossomo(s).
+- File(s) in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
+
 **statistical**
 	combineCoverage.csv	Arquivo tabular compilando dados de cobertura da(s) amostra(s). Ele possui proporção da regição anotada que é coberta e a depth.
 	frequencySNPs.csv	Frequencia de multações pontuais heterozigóticas,
