@@ -143,11 +143,11 @@ When all analysed files are.
 *normalized.Cov.csv*
 - Table with normalized depth values by grubs test.
 *wilcox.Cov.csv*
-- Statistical insformations of the wilcox tests. 
-
-statistical/coverage	Boxplots com analises de anauplodias para asmostras e cromossomos.
-statistical/frequency	Graficos de barras com a contagem das frequencias de SNPs heterozigoticos.
-
+- Statistical informations of the wilcox tests. 
+*coverage/*
+- Boxplots com analises de anauplodias para asmostras e cromossomos.
+*frequency/*
+- Graficos de barras com a contagem das frequencias de SNPs heterozigoticos.
 
 ### Arguments
 ```
