@@ -179,7 +179,7 @@ The standard output of the CADIn is divided in 4 folders.
 ## Author
 - **Name:** Anderson Coqueiro-dos-Santos
 - **E-mail:** andersoncoqueiro8@gmail.com
-- **Github:** [coqueiro-dos-santos](https://github.com/coqueiro-dos-santos)
-- **Mendeley:** [anderson-coqueiro-dos-santos2](https://www.mendeley.com/profiles/anderson-coqueiro-dos-santos2/)
-- **Linkedin:** [anderson-coqueiro-dos-santos-248789170](https://www.linkedin.com/in/anderson-coqueiro-dos-santos-248789170/)
+- **Github:** [github.com/coqueiro-dos-santos](https://github.com/coqueiro-dos-santos)
+- **Mendeley:** [mendeley.com/profiles/anderson-coqueiro-dos-santos2](https://www.mendeley.com/profiles/anderson-coqueiro-dos-santos2/)
+- **Linkedin:** [linkedin.com/in/anderson-coqueiro-dos-santos-248789170](https://www.linkedin.com/in/anderson-coqueiro-dos-santos-248789170/)
 - **Lattes:** [lattes.cnpq.br/7550107239214921](http://lattes.cnpq.br/7550107239214921)
