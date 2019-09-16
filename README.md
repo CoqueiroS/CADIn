@@ -98,3 +98,25 @@ install.packages("<insert package name here>")
 ```
 ## Working with CADIn
 ### Arguments
+```
+--- Parameters ---------------------
+	-i  BAM file(s).
+	-r  Fasta file containing reference sequence.
+	-a  GFF file containing annotation information.
+--- Advanced Options ---------------
+	-q  Filter input(s) by mapping quality [INT] (default -q 0).
+	-f  Annotated region to be filtered ('gene', 'CDS', 'mRNA', 'tRNA', 'etc') (default -f gene).
+	-s  Directory to save the temporary files (default -s /home/coqueiro//tmp).
+	-t  Number of threads to SAMTOOLS run [INT] (default -t 1).
+	-o  Name for your output files (default -o result_CADIn).
+--- Type of analysis ---------
+	-v  Variant calling analysis (1), or not (0) (default -v 1).
+	-d  Minimum number of reads to confirm each variant [INT] (default -d 5) (require '-v 1').
+	-c  Genome/genes coverage analysis (1), or not (0) (default -c 1).
+--- Statistical Parameters ---------
+	-u  Determine if statistical analysis (1), or not (0), will be performed (default -u 1).
+	-m  Calculate using mean (0) or median (1) [INT] (default -m 1).
+	-g  Graphics generate with R: yes (1) or not (0) (default -g 1) (require '-u 1').
+------------------------------------
+```
+
