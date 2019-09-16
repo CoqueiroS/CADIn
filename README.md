@@ -73,10 +73,12 @@ export PATH=/where/to/install/bin:$PATH
 
 #### Othres softwares
 **BEDTools**
+
 **Main page:** `` bedtools.readthedocs.io ``
 >[BEDTools v2.28](https://github.com/arq5x/bedtools2/releases/download/v2.28.0/bedtools-2.28.0.tar.gz)
 
 **R**
+
 **Main page:** `` r-project.org ``
 >[R v3.6](https://cloud.r-project.org/src/base/R-3/R-3.6.1.tar.gz)
 
