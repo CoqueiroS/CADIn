@@ -92,8 +92,7 @@ sudo cpan install Statistics::R
 ```
 **R - Packages**
 
-There are two packages (ggplot2 and outliers). Both are instaled from the CADIn.
-They can be installed before. For this, open the R (software).
+There are two packages (ggplot2 and outliers). Both are instaled from the CADIn. They can be installed before. For this, open the R (software).
 ```
 install.packages("<insert package name here>")
 ```
