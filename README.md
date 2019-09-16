@@ -176,5 +176,5 @@ The standard output of the CADIn is divided in 4 folders.
 ## Author
 - **Name:** Anderson Coqueiro-dos-Santos
 - **E-mail:** andersoncoqueiro8@gmail.com
-- **Github:** [link](https://github.com/coqueiro-dos-santos)
-- **Mendeley:** [link](https://www.mendeley.com/profiles/anderson-coqueiro-dos-santos2/)
+- **Github:** [coqueiro-dos-santos](https://github.com/coqueiro-dos-santos)
+- **Mendeley:** [anderson-coqueiro-dos-santos2](https://www.mendeley.com/profiles/anderson-coqueiro-dos-santos2/)
