@@ -101,7 +101,7 @@ install.packages("<insert package name here>")
 Making user-friendly
 1. Makes executable
 ```
-cd CADIn
+cd CADIn/
 chmod +x ./CADIn
 ```
 2. Easy acess
