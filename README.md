@@ -183,7 +183,7 @@ GFF file has different informations about annotation. Although this informations
 
 **Temporary directory**
 
-CADIn will be to create a directory in the same path where it's installed. However, you can find problems with permission or low space to save the temporary files. So, thougth of the flag `-s` the directory can be alterated.
+CADIn will be to create a directory in the same path where it's installed. However, you can find problems with permission or low space to save the temporary files. So, thougth the flag `-s` the directory can be alterated.
 
 ## Citation
 *Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
