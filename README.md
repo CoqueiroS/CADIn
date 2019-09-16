@@ -173,6 +173,7 @@ The standard output of the CADIn is divided in 4 folders.
 ------------------------------------
 ```
 ## Citation
+*Citation: Coqueiro-dos-Santos, A.*
 ## Licence
 >[GNU General Public License v3.0](https://github.com/coqueiro-dos-santos/CADIn/blob/master/LICENSE.txt)
 ## Author
