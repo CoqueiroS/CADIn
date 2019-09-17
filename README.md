@@ -7,9 +7,9 @@ CADIn is a software free (open source) and developed to Unix systems (e.i. Linux
 
 ## Dependences
 - Perl
-- BCFTools (version 1.9)
+- BCFTools (version 1.7)
 - BEDTools (2.26 or superior)
-- SAMTools (version 1.9)
+- SAMTools (version 1.7)
 - R (version 3.4 or superior)
 
 Perl Modules
@@ -174,6 +174,15 @@ The standard output of the CADIn is divided in 4 folders.
 	-g  Graphics generate with R: yes (1) or not (0) (default -g 1) (require '-u 1').
 ------------------------------------
 ```
+**Main Input Files**
+
+At least three files are needed for CADIn to work, BAM, FASTA and GFF files. The `-i` works with only one BAM files, but if specify a directory all BAM files are used to analysis. When the directory is used as input `-i` the software detects all files named as “.bam” in path. FASTA file `-r` is the same reference used in the mapping of the BAM data. Already GFF file `-a` need be correspondent to the reference (FASTA file), in other words, all identification (column 1) must be identical to sequence Fasta identification in reference file.
+
+*Essential Arguments*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
+```
+
 **Mapping Quality**
 
 The flag `-q` is used to filter reads for quality. CADIn doesn't filter in standard mode, this is to reduce process time in cases when the BAM files had been filtered yet. Then, if the BAM file not filtered it can be used.
@@ -225,7 +234,6 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0
 ```
 
 You may also prefer to use only variant calling or coverage data without to generate statistics `-u` or graphics `-g` results. But, if the statistical results `-u` isn't generated, the graphics won't be either.
-
 
 *No statistical analysis and graphics*
 ```
