@@ -117,7 +117,7 @@ export PATH=/<CADIn directory>/:$PATH
 ### Running
 To run is necessary 3 files.
 - BAM format file or directory with BAM file(s).
-- FASTA format file where reads were mapped used like reference for BAM file(s).
+- FASTA format file where reads were mapped. File used as reference for BAM file(s).
 - GFF format file referent the reference genome.
 
 **Basic command-line**
