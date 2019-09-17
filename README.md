@@ -3,7 +3,7 @@
 
 #
 ### What means CADIn?
-CADIn is a softwares free (open source) and developed to unix systems (e.i. linux) that permit to search allelic differences in NGS (next generation sequences) data. This tool estimate ploidy level  for each chromosomes in individuo. For this, it calculate the allelic frequency based in single nucleotide variants and, furthermore, analyse depth reads in regions annotated with good coverage, like: genes, CDSs, exon and so on.
+CADIn is a software free (open source) and developed to Unix systems (e.i. Linux) that permit to search allelic differences in NGS (next-generation sequences) data. This tool estimate ploidy level for each chromosome in sample. For this, it calculates the allelic frequency based in single nucleotide variants and, furthermore, analyze depth reads in regions annotated with good coverage as genes, CDSs, exon and so on.
 
 ## Dependences
 - Perl
@@ -39,8 +39,8 @@ Perl Modules
 
 ###### *If not found run `'sudo yum install epel-release'` before*
 
-### Othres (Via Terminal)
-You can try install the softwares bcftools and samtools by command line, once the systems can have old versions or don't has it.
+### Others (Via Terminal)
+You can try to install the software BCFTools and SAMTools by command line, once the systems can have old versions or don't has it.
 #### BCFTools and SAMTools (version 1.9)
 **Main page:** ``htslib.org``
 
@@ -82,20 +82,20 @@ export PATH=/where/to/install/bin:$PATH
 **Main page:** `` r-project.org ``
 >[R v3.6](https://cloud.r-project.org/src/base/R-3/R-3.6.1.tar.gz)
 
-*Installing: `For this sofwares you use the same steps explained above (BCFTools and SAMTools).`*
+*Installing: `For this software, you use the same steps explained above (BCFTools and SAMTools).`*
 
 #### Modules and Packages
 **Statistics::R**
 
 **Main page:** `` metacpan.org/pod/Statistics::R ``
 
-Usually modules are automatically detected. However, if not you need to install from the terminal.
+Usually, modules are automatically detected. However, if not you need to install from the terminal.
 ```
 sudo cpan install Statistics::R
 ```
 **R - Packages**
 
-There are two packages (ggplot2 and outliers). Both are instaled from the CADIn. They can be installed before. For this, open the R (software).
+There are two packages (ggplot2 and outliers). Both are installed from the CADIn. They can be installed before. For this, open the R (software).
 ```
 install.packages("<insert package name here>")
 ```
@@ -107,23 +107,24 @@ Making user-friendly
 cd CADIn/
 chmod +x ./CADIn
 ```
-2. Easy acess
+2. Easy access
 ```
 alias CADIn='/<path to CADIn>/./CADIn'
 or
 export PATH=/<CADIn directory>/:$PATH
 ```
-*`You need specify the complete path to CADIn.`*
-### Runing
+*`You need to specify the complete path to CADIn.`*
+### Running
 To run is necessary 3 files.
 - BAM format file or directory with BAM file(s).
 - FASTA format file where reads were mapped used like reference for BAM file(s).
 - GFF format file referent the reference genome.
 
-**Basic command line**
+**Basic command-line**
 ```
 CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
+
 ### Results
 The standard output of the CADIn is divided in 4 folders.
 
@@ -134,7 +135,7 @@ The standard output of the CADIn is divided in 4 folders.
 	- Read coverage in selected regions of the annotation file.
 
 - **vcf/**
-	- File in variante call format (VCF) with all single nucleotide variants found on chromosome(s).
+	- File in variant call format (VCF) with all single-nucleotide variants found on chromosome(s).
 
 - **statistical/**
 	- *combineCoverage.csv*
@@ -144,11 +145,11 @@ The standard output of the CADIn is divided in 4 folders.
 	- *normalized.Cov.csv*
 		- Table with normalized depth values by grubs test.
 	- *wilcox.Cov.csv*
-		- Statistical informations of the wilcox tests. 
+		- Statistical informations of the wilcox tests.
 	- *coverage/*
-		- Folder where are saved Boxplots pictures referente the aneuploids analysis for each sample and chromosome.
+		- Folder where are saved Boxplots pictures referent the aneuploids analysis for each sample and chromosome.
 	- *frequency/*
-		- Folder where are saved all Barplot graphics with frenquency count of the heterozygous single nucleotide variants.
+		- Folder where are saved all Barplot graphics with the frequency count of the heterozygous single nucleotide variants.
 
 ### Arguments
 **General paramenters**
@@ -177,17 +178,37 @@ The standard output of the CADIn is divided in 4 folders.
 
 The flag `-q` is used to filter reads for quality. CADIn doesn't filter in standard mode, this is to reduce process time in cases when the BAM files had been filtered yet. Then, if the BAM file not filtered it can be used.
 
+*Filtering by mapping quality*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 30
+```
+
 **Annotated regions**
 
-GFF file has different informations about annotation. Although this informations were importants only one can be used for analyses. We recommend those region the best covers the chromosome/genome. Due this was used `-f gene` like standard.
+GFF file has different information about annotation. Although this information was important only one can be used for analyses. We recommend those regions the best covers the chromosome/genome. Due this was put `-f gene` like standard.
+
+*Calculate coverage using CDS regions*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -f CDS
+```
 
 **Temporary directory**
 
-CADIn will be to create a directory in the same path where it's installed. However, you can find problems with permission or low space to save the temporary files. So, thougth the flag `-s` the directory can be alterated.
+CADIn will be to create a directory in the same path where it's installed. However, you can find problems with permission or low space to save the temporary files. So, thought the flag `-s` the directory can be altered.
+
+*Save temporary files in HOME path*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -s $HOME/test/tmp/
+```
 
 **Directory with results**
 
-The software has the standard output directory `result_CADIn/`. With `-o` 
+The software has the standard output directory `result_CADIn/`. With `-o` will be created a new directory to save the results. In case when input is similar this flag can help not overwriting the results.
+
+*Change output directory*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -o test_Nov_2019/
+```
 
 ## Citation
 *Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
