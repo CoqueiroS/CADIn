@@ -212,7 +212,17 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -o test_Nov_2019/
 
 **Selecting analysis**
 
+The variant calling and depth coverage analysis can be done separately. The flag `-v` and `-c` when is equals 0, the CADIn doesn't evaluate variant calling or depth coverage, respectively. If both are 0 no analysis will be realized.
 
+*Only variant calling analysis*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -c 0
+```
+
+*Only coverage analysis*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0
+```
 
 ## Citation
 *Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
