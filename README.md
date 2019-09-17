@@ -212,7 +212,7 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -o test_Nov_2019/
 
 **Selecting analysis**
 
-The variant calling and depth coverage analysis can be done separately. The flag `-v` and `-c` when is equals 0, the CADIn doesn't evaluate variant calling or depth coverage, respectively. If both are 0 no analysis will be realized.
+The variant calling and depth coverage analysis can be done separately. The flag `-v` and `-c` when it’s equals 0, the CADIn doesn't evaluate variant calling or depth coverage, respectively, and will have no statistical and graphics referent that one. If both are 0 no analysis will be realized.
 
 *Only variant calling analysis*
 ```
@@ -222,6 +222,29 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -c 0
 *Only coverage analysis*
 ```
 CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0
+```
+
+You may also prefer to use only variant calling or coverage data without to generate statistics `-u` or graphics `-g` results. But, if the statistical results `-u` isn't generated, the graphics won't be either.
+
+
+*No statistical analysis and graphics*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -u 0
+```
+
+*Only statistical analysis without to generate graphics*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -g 0
+```
+
+*Only statistical analysis of the variant calling data*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -c 0 -g 0
+```
+
+*Only coverage analysis and no statistic*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0 -u 0
 ```
 
 ## Citation
