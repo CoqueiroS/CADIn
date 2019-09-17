@@ -210,6 +210,10 @@ The software has the standard output directory `result_CADIn/`. With `-o` will b
 CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -o test_Nov_2019/
 ```
 
+**Selecting analysis**
+
+
+
 ## Citation
 *Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
 ## Licence
