@@ -242,7 +242,7 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -g 0
 CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -c 0 -g 0
 ```
 
-*Only coverage analysis and no statistic*
+*Only coverage analysis and no statistics*
 ```
 CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0 -u 0
 ```
