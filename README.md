@@ -7,9 +7,9 @@ CADIn is a software free (open source) and developed to Unix systems (e.i. Linux
 
 ## Dependences
 - Perl
-- BCFTools (version 1.9)
+- BCFTools (version 1.7)
 - BEDTools (2.26 or superior)
-- SAMTools (version 1.9)
+- SAMTools (version 1.7)
 - R (version 3.4 or superior)
 
 Perl Modules
