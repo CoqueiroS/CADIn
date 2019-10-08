@@ -8,7 +8,6 @@ CADIn is a software free (open source) and developed to Unix systems (e.i. Linux
 ## Dependences
 - Perl
 - BCFTools (version 1.7)
-- BEDTools (2.26 or superior)
 - SAMTools (version 1.7)
 - R (version 3.4 or superior)
 
@@ -21,9 +20,6 @@ Perl Modules
 **BCFTools**
 >sudo apt-get install bcftools
 
-**BEDTools**
->sudo apt-get install bedtools
-
 **SAMTools**
 >sudo apt-get install samtools
 
@@ -31,9 +27,6 @@ Perl Modules
 >sudo apt-get install r-base
 
 ### CentOS / Fedora / Red Hat
-**BEDTools**
->sudo yum install BEDTools
-
 **R**
 >sudo yum install R
 
@@ -72,10 +65,6 @@ export PATH=/where/to/install/bin:$PATH
 ```
 
 #### Othres softwares
-**BEDTools**
-
-**Main page:** `` bedtools.readthedocs.io ``
->[BEDTools v2.28](https://github.com/arq5x/bedtools2/releases/download/v2.28.0/bedtools-2.28.0.tar.gz)
 
 **R**
 
@@ -128,9 +117,6 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ### Results
 The standard output of the CADIn is divided in 4 folders.
 
-- **genomecov/**
-	- Read coverage at each position on chromosomes.
-
 - **genescov/**
 	- Read coverage in selected regions of the annotation file.
 
@@ -168,6 +154,7 @@ The standard output of the CADIn is divided in 4 folders.
 	-v  Variant calling analysis (1), or not (0) (default -v 1).
 	-d  Minimum number of reads to confirm each variant [INT] (default -d 5) (require '-v 1').
 	-c  Genome/genes coverage analysis (1), or not (0) (default -c 1).
+	-l  Minimum covered length accepted for the regions to be used for statistical analysis (default -l 50).
 --- Statistical Parameters ---------
 	-u  Determine if statistical analysis (1), or not (0), will be performed (default -u 1).
 	-m  Calculate using mean (0) or median (1) [INT] (default -m 1).
