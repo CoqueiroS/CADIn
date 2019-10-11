@@ -32,6 +32,10 @@ Perl Modules
 
 ###### *If not found run `'sudo yum install epel-release'` before*
 
+###### *The package manager `(yum)` used in this distros has SAMTools software, but an old version.*
+
+###### *We recommend install BCFTools and SAMTools via terminal, `describe above`.*
+
 ### Others (Via Terminal)
 You can try to install the software BCFTools and SAMTools by command line, once the systems can have old versions or don't has it.
 #### BCFTools and SAMTools (version 1.9)
