@@ -34,7 +34,7 @@ Perl Modules
 
 ###### *The package manager `(yum)` used in this distros has SAMTools software, but an old version.*
 
-###### *We recommend install BCFTools and SAMTools via terminal, `describe above`.*
+###### *We recommend install BCFTools and SAMTools via terminal, `describe below`.*
 
 ### Others (Via Terminal)
 You can try to install the software BCFTools and SAMTools by command line, once the systems can have old versions or don't has it.
