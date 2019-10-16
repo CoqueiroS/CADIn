@@ -149,7 +149,7 @@ The standard output of the CADIn is divided in 4 folders.
 	-r  Fasta file containing reference sequence.
 	-a  GFF file containing annotation information.
 --- Advanced Options ---------------
-	-q  Filter input(s) by mapping quality [INT] (default -q 0).
+	-q  Filter input(s) by mapping quality [INT] (default -q 30).
 	-f  Annotated region to be filtered ('gene', 'CDS', 'mRNA', 'tRNA', 'etc') (default -f gene).
 	-s  Directory to save the temporary files (default -s /tmp).
 	-t  Number of threads to SAMTOOLS run [INT] (default -t 1).
@@ -177,11 +177,16 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 
 **Mapping Quality**
 
-The flag `-q` is used to filter reads for quality. CADIn doesn't filter in standard mode, this is to reduce process time in cases when the BAM files had been filtered yet. Then, if the BAM file not filtered it can be used.
+The flag `-q` is used to filter reads for quality. CADIn filters with mapping quality 30 in standard mode. In case, when the input already have been filtered by mapping quality, you can put `-q 0`, this is help to reduce process time.
+
+*Previous filtered by mapping quality*
+```
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 0
+```
 
 *Filtering by mapping quality*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 30
+CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 20
 ```
 
 **Annotated regions**
