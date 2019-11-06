@@ -159,6 +159,7 @@ The standard output of the CADIn is divided in 4 folders.
 	-d  Minimum number of reads to confirm each variant [INT] (default -d 5) (require '-v 1').
 	-k  Minimum SNP quality for each variant [INT] (default -k 10) (require '-v 1').
 	-c  Genome/genes coverage analysis (1), or not (0) (default -c 1).
+	-x  Minimum covered length accepted in regions for calculating genome coverage (default -x 50) (require '-c 1').
 	-l  Minimum covered length accepted for the regions to be used for statistical analysis (default -l 50) (require '-c 1').
 	-n  Minimum number of regions accepted to validate chromosome aneuploidy. Number checked after Grubbs test (default -n 5) (require '-c 1').
 --- Statistical Parameters ---------
