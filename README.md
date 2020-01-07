@@ -133,7 +133,7 @@ The standard output of the CADIn is divided in 4 folders.
 	- *frequencySNPs.csv*
 		- Frequency of the heterozygous single nucleotide variants by chromosome.
 	- *normalized.Cov.csv*
-		- Table with normalized depth values by grubs test.
+		- Table with normalized depth values by Grubb's test.
 	- *wilcoxon_rank.Cov.csv*
 		- Statistical information of the Mann-Whitney-Wilcoxon tests.
 	- *coverage/*
