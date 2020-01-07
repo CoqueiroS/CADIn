@@ -135,7 +135,7 @@ The standard output of the CADIn is divided in 4 folders.
 	- *normalized.Cov.csv*
 		- Table with normalized depth values by grubs test.
 	- *wilcoxon_rank.Cov.csv*
-		- Statistical informations of the wilcox tests.
+		- Statistical information of the Mann-Whitney-Wilcoxon tests.
 	- *coverage/*
 		- Folder where are saved Boxplots pictures referent the aneuploids analysis for each sample and chromosome.
 	- *frequency/*
