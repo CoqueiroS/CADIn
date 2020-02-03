@@ -27,7 +27,15 @@ Perl Modules
 >sudo apt-get install r-base
 
 ### CentOS / Fedora / Red Hat
+**BCFTools**
+>sudo dnf install bcftools
+
+**SAMTools**
+>sudo dnf install samtools
+
 **R**
+>sudo dnf install R
+or
 >sudo yum install R
 
 ###### *If not found run `'sudo yum install epel-release'` before*
