@@ -35,8 +35,8 @@ Perl Modules
 
 **R**
 >sudo dnf install R
->or
->sudo yum install R
+
+###### *You can run `'sudo yum install R'`*
 
 ###### *If not found run `'sudo yum install epel-release'` before*
 
