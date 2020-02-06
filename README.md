@@ -3,7 +3,7 @@
 
 #
 ### What means CADIn?
-CADIn is a software free (open source) and developed to Unix systems (e.i. Linux) that permit to search allelic differences in NGS (next-generation sequences) data. This tool estimate ploidy level for each chromosome in sample. For this, it calculates the allelic frequency based in single nucleotide variants and, furthermore, analyze depth reads in regions annotated with good coverage as genes, CDSs, exon and so on.
+CADIn is a software free (open source) and developed to Unix systems (e.i. Linux) that permit to search allelic differences in NGS (next-generation sequences) data. This tool estimates the ploidy level for each chromosome in the sample. For this, it calculates the allelic frequency based in single nucleotide variants and, furthermore, analyze depth reads in regions annotated with good coverage as genes, CDSs, exon and so on.
 
 ## Dependences
 - Perl
@@ -49,7 +49,7 @@ You can try to install the software BCFTools and SAMTools by command line, once 
 #### BCFTools and SAMTools (version 1.9)
 **Main page:** ``htslib.org``
 
-**Links to softwares**
+**Links to software**
 >[BCFTools v1.9](https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2)
 
 >[Samtools v1.9](https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2)
@@ -76,7 +76,7 @@ Preparing to use
 export PATH=/where/to/install/bin:$PATH
 ```
 
-#### Othres softwares
+#### Others software
 
 **R**
 
@@ -90,7 +90,7 @@ export PATH=/where/to/install/bin:$PATH
 
 **Main page:** `` metacpan.org/pod/Statistics::R ``
 
-Usually, modules are automatically detected. However, if not you need to install from the terminal.
+Usually, modules are automatically detected. However, if not you need to install it from the terminal.
 ```
 sudo cpan install Statistics::R
 ```
@@ -116,9 +116,9 @@ export PATH=/<CADIn directory>/:$PATH
 ```
 *`You need to specify the complete path to CADIn.`*
 ### Running
-To run is necessary 3 files.
+To run is necessary for 3 files.
 - BAM format file or directory with BAM file(s).
-- FASTA format file where reads were mapped. File used as reference for BAM file(s).
+- FASTA format file where reads were mapped. File used as a reference for BAM file(s).
 - GFF format file referent the reference genome.
 
 **Basic command-line**
@@ -133,7 +133,7 @@ The standard output of the CADIn is divided in 4 folders.
 	- Read coverage in selected regions of the annotation file.
 
 - **vcf/**
-	- File in variant call format (VCF) with all single-nucleotide variants found on chromosome(s).
+	- File in variant call format (VCF) with all single-nucleotide variants found on the chromosome(s).
 
 - **statistical/**
 	- *combineCoverage.csv*
@@ -145,9 +145,9 @@ The standard output of the CADIn is divided in 4 folders.
 	- *wilcoxon_rank.Cov.csv*
 		- Statistical information of the Mann-Whitney-Wilcoxon tests.
 	- *coverage/*
-		- Folder where are saved Boxplots pictures referent the aneuploids analysis for each sample and chromosome.
+		- The folder where are saved Boxplots pictures referent the aneuploids analysis for each sample and chromosome.
 	- *frequency/*
-		- Folder where are saved all Barplot graphics with the frequency count of the heterozygous single nucleotide variants.
+		- The folder where are saved all Barplot graphics with the frequency count of the heterozygous single nucleotide variants.
 
 ### Arguments
 **General paramenters**
@@ -178,7 +178,7 @@ The standard output of the CADIn is divided in 4 folders.
 ```
 **Main Input Files**
 
-At least three files are needed for CADIn to work, BAM, FASTA and GFF files. The `-i` works with only one BAM files, but if specify a directory all BAM files are used to analysis. When the directory is used as input `-i` the software detects all files named as “.bam” in path. FASTA file `-r` is the same reference used in the mapping of the BAM data. Already GFF file `-a` need be correspondent to the reference (FASTA file), in other words, all identification (column 1) must be identical to sequence Fasta identification in reference file.
+At least three files are needed for CADIn to work, BAM, FASTA and GFF files. The `-i` works with only one BAM files, but if specify a directory all BAM files are used to analyze. When the directory is used as input `-i` the software detects all files named “.bam” in the path. FASTA file `-r` is the same reference used in the mapping of the BAM data. Already GFF file `-a` need be correspondent to the reference (FASTA file), in other words, all identification (column 1) must be identical to sequence Fasta identification in reference file.
 
 *Essential Arguments*
 ```
@@ -264,7 +264,7 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0 -u 0
 
 ## Citation
 *Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
-## Licence
+## License
 >[GNU General Public License v3.0](https://github.com/coqueiro-dos-santos/CADIn/blob/master/LICENSE.txt)
 ## Author
 - **Name:** Anderson Coqueiro-dos-Santos
