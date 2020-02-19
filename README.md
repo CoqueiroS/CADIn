@@ -150,7 +150,7 @@ The standard output of the CADIn is divided in 4 folders.
 		- The folder where are saved all Barplot graphics with the frequency count of the heterozygous single nucleotide variants.
 
 ### Arguments
-**General paramenters**
+**General parameters**
 ```
 --- Parameters ---------------------
 	-i  BAM file(s).
