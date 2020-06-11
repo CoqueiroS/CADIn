@@ -3,13 +3,13 @@
 
 #
 ### What means CADIn?
-CADIn is a software free (open source) and developed to Unix systems (e.i. Linux) that permit to search allelic differences in NGS (next-generation sequences) data. This tool estimates the ploidy level for each chromosome in the sample. For this, it calculates the allelic frequency based in single nucleotide variants and, furthermore, analyze depth reads in regions annotated with good coverage as genes, CDSs, exon and so on.
+CADIn is a free software (open source), developed to Unix systems (e.i. Linux), that uses both allele frequencies of heterozygous single nucleotide polymorphisms (SNPs) and read depth coverage analyses for detecting genome polyploidy and chromosomal somy variations based on next generation sequencing data.
 
 ## Dependences
 - Perl
-- BCFTools (version 1.7)
-- SAMTools (version 1.7)
-- R (version 3.4 or superior)
+- BCFTools (version 1.7 or higher)
+- SAMTools (version 1.7 or higher)
+- R (version 3.4 or higher)
 
 Perl Modules
 - Statistics::R
@@ -45,14 +45,14 @@ Perl Modules
 ###### *We recommend install BCFTools and SAMTools via terminal, `describe below`.*
 
 ### Others (Via Terminal)
-You can try to install the software BCFTools and SAMTools by command line, once the systems can have old versions or don't has it.
-#### BCFTools and SAMTools (version 1.9)
+	
+#### BCFTools and SAMTools
 **Main page:** ``htslib.org``
 
 **Links to software**
->[BCFTools v1.9](https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2)
+>[BCFTools v1.10](https://github.com/samtools/bcftools/releases/download/1.10.2/bcftools-1.10.2.tar.bz2)
 
->[Samtools v1.9](https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2)
+>[Samtools v1.10](https://github.com/samtools/samtools/releases/download/1.10/samtools-1.10.tar.bz2)
 
 **Install tools**
 
@@ -62,7 +62,7 @@ wget <insert link here>
 ```
 Decompress
 ```
-tar -xvf *tools-1.9.tar.bz2
+tar -xvf *tools-1.xx.tar.bz2
 ```
 Configure and install
 ```
@@ -81,7 +81,7 @@ export PATH=/where/to/install/bin:$PATH
 **R**
 
 **Main page:** `` r-project.org ``
->[R v3.6](https://cloud.r-project.org/src/base/R-3/R-3.6.1.tar.gz)
+>[R v3.6](https://cloud.r-project.org/src/base/R-3/R-3.6.3.tar.gz)
 
 *Installing: `For this software, you use the same steps explained above (BCFTools and SAMTools).`*
 
@@ -121,13 +121,15 @@ To run is necessary for 3 files.
 - FASTA format file where reads were mapped. File used as a reference for BAM file(s).
 - GFF format file referent the reference genome.
 
+CADIn uses only the reads that map to the input FASTA genome sequence, even if the BAM file may contain other sequences, allowing the user to easily choose contigs/chromosomes to be evaluated. Similarly, the RD analysis will be performed only in the genes present in the user-provided GFF file, allowing the exclusion of known multicopy genes.
+
 **Basic command-line**
 ```
 CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
 
 ### Results
-The standard output of the CADIn is divided in 4 folders.
+The standard output of the CADIn is divided in 3 folders.
 
 - **genescov/**
 	- Read coverage in selected regions of the annotation file.
@@ -137,13 +139,17 @@ The standard output of the CADIn is divided in 4 folders.
 
 - **statistical/**
 	- *combineCoverage.csv*
-		- Tabular file with coverage data. It has the coverage proportion of the annotated region and its depth.
+		- Tabular file with gene coverage data. It has the proportion of each gene covered by the reads and median (-m) read depth coverage of each gene.
+		- Columns: [COD] Which sample is represented. [CHR] Chromosome to which the gene belongs. [DEP] Calculation (-m) of reads for each position of the annotated region. [COV] Proportion of region that has reads. [NOR] Calculation (-m) of reads across the sample. [ID] Identification removed from gff file.
 	- *frequencySNPs.csv*
 		- Frequency of the heterozygous single nucleotide variants by chromosome.
+		- Columns: [COD] Which sample is represented. [CHR] Chromosome analyzed. [FREQ] Proportion of heterozygous SNVs in chromosome. [COUNT] Counting of SNVs with that frequency.
 	- *normalized.Cov.csv*
-		- Table with normalized depth values by Grubb's test.
+		- Table with normalized depth values of each gene after by Grubb's test. Genes with discrepant values are removed from this table.
+		- Columns: [COD] Which sample is represented. [CHR] Chromosome to which the gene belongs. [DEP] Normalized values of each genes. Normalization realized by the depth of the sample. [ID] Identification removed from gff file.
 	- *wilcoxon_rank.Cov.csv*
-		- Statistical information of the Mann-Whitney-Wilcoxon tests.
+		- Chromosomal somy variation statistical validation, with the Mann-Whitney-Wilcoxon tests.Statistical information of the Mann-Whitney-Wilcoxon tests. 
+		- Columns: [library] Which sample is represented. [chromosome] Chromosome analyzed. [p_less/grater_”n”] P-value of Mann-Whitney-Wilcoxon test for values less /greater than “n”. [mean] Average of the normalized value of genes in chromosome for each sample. [median] Median of the normalized value of genes in chromosome for each sample. [sd] Standard derivation of the normalized value of genes in chromosome for each sample.
 	- *coverage/*
 		- The folder where are saved Boxplots pictures referent the aneuploids analysis for each sample and chromosome.
 	- *frequency/*
@@ -178,7 +184,7 @@ The standard output of the CADIn is divided in 4 folders.
 ```
 **Main Input Files**
 
-At least three files are needed for CADIn to work, BAM, FASTA and GFF files. The `-i` works with only one BAM files, but if specify a directory all BAM files are used to analyze. When the directory is used as input `-i` the software detects all files named “.bam” in the path. FASTA file `-r` is the same reference used in the mapping of the BAM data. Already GFF file `-a` need be correspondent to the reference (FASTA file), in other words, all identification (column 1) must be identical to sequence Fasta identification in reference file.
+Three files are needed for CADIn to work, BAM, FASTA and GFF files. The `-i` works with only one BAM files, but if specify a directory all BAM files are used to analyze. When the directory is used as input `-i` the software detects all files named “.bam” in the path. FASTA file `-r` is the same reference used in the mapping of the BAM data. Already GFF file `-a` need be correspondent to the reference (FASTA file), in other words, all identification (column 1) must be identical to sequence Fasta identification in reference file.
 
 *Essential Arguments*
 ```
@@ -201,7 +207,7 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 20
 
 **Annotated regions**
 
-GFF file has different information about annotation. Although this information was important only one can be used for analyses. We recommend those regions the best covers the chromosome/genome. Due this was put `-f gene` like standard.
+GFF file has different annotation information, as Gene, CDS and mRNA, and only one can be used for analyses. The selection of the one used is governed by the flag “-f”. The default parameter is “-f gene”.
 
 *Calculate coverage using CDS regions*
 ```
