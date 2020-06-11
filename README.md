@@ -1,5 +1,5 @@
 # **CADIn** - Chromosomal Amplification and Deletion Inference
-###### *Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
+###### *Citation: Citation: Coqueiro-dos-Santos, A. Reis-Cunha, JL, Bartholomeu, DC.*
 
 #
 ### What means CADIn?
@@ -269,7 +269,7 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0 -u 0
 ```
 
 ## Citation
-*Citation: Coqueiro-dos-Santos, A. Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.*
+*Citation: Citation: Coqueiro-dos-Santos, A. Reis-Cunha, JL, Bartholomeu, DC.*
 ## License
 >[GNU General Public License v3.0](https://github.com/coqueiro-dos-santos/CADIn/blob/master/LICENSE.txt)
 ## Author
