@@ -3,7 +3,7 @@
 
 #
 ### What means CADIn?
-CADIn is a free software (open source), developed to Unix systems (e.i. Linux), that uses both allele frequencies of heterozygous single nucleotide polymorphisms (SNPs) and read depth coverage analyses for detecting genome polyploidy and chromosomal somy variations based on next generation sequencing data.
+CADIn is a free software (open source), developed to Unix systems (e.i. Linux), that uses both allele frequencies of heterozygous single nucleotide polymorphisms (SNPs) and read depth coverage analyses for detecting genome polyploidy and chromosomal somy variations based on next generation sequencing data.		
 
 ## Dependences
 - Perl
@@ -139,16 +139,16 @@ The standard output of the CADIn is divided in 3 folders.
 
 - **statistical/**
 	- *combineCoverage.csv*
-		- Tabular file with gene coverage data. It has the proportion of each gene covered by the reads and median (-m) read depth coverage of each gene.
-		- Columns: [COD] Which sample is represented. [CHR] Chromosome to which the gene belongs. [DEP] Calculation (-m) of reads for each position of the annotated region. [COV] Proportion of region that has reads. [NOR] Calculation (-m) of reads across the sample. [ID] Identification removed from gff file.
+		- Tabular file with gene coverage data. It has the proportion of each gene covered by the reads and median read depth coverage of each gene.
+		- Columns: [COD] Sample name. [CHR] Chromosome location of the gene. [DEP] Median number of reads for each position of the gene. [COV] Proportion of the gene that has reads. [NOR] Normalized median coverage of all genes across the sample. [ID] Gene ID as reported in the gff file.
 	- *frequencySNPs.csv*
-		- Frequency of the heterozygous single nucleotide variants by chromosome.
-		- Columns: [COD] Which sample is represented. [CHR] Chromosome analyzed. [FREQ] Proportion of heterozygous SNVs in chromosome. [COUNT] Counting of SNVs with that frequency.
+		- Frequency of the heterozygous single nucleotide variants per chromosome. Each line reports a chromosomal position containing a heterozygous SNV with two, and only two variants.
+		- Columns: [COD] Sample name. [CHR] Chromosome analyzed. [FREQ] Frequency of heterozygous SNVs in the corresponding chromosome. [COUNT] Number of SNVs with that frequency.
 	- *normalized.Cov.csv*
-		- Table with normalized depth values of each gene after by Grubb's test. Genes with discrepant values are removed from this table.
-		- Columns: [COD] Which sample is represented. [CHR] Chromosome to which the gene belongs. [DEP] Normalized values of each genes. Normalization realized by the depth of the sample. [ID] Identification removed from gff file.
+		- Table with normalized depth values of each gene after Grubb's test. Genes with discrepant values are removed from this table.
+		- Columns: [COD] Sample name. [CHR] Chromosome location of the gene. [DEP] Normalized median number of reads for each position of the gene. Normalization are performed with the depth of the sample. [ID] Gene ID as reported in the gff file.
 	- *wilcoxon_rank.Cov.csv*
-		- Chromosomal somy variation statistical validation, with the Mann-Whitney-Wilcoxon tests.Statistical information of the Mann-Whitney-Wilcoxon tests. 
+		- Chromosomal somy variation statistical validation, with the Mann-Whitney-Wilcoxon tests.
 		- Columns: [library] Which sample is represented. [chromosome] Chromosome analyzed. [p_less/grater_”n”] P-value of Mann-Whitney-Wilcoxon test for values less /greater than “n”. [mean] Average of the normalized value of genes in chromosome for each sample. [median] Median of the normalized value of genes in chromosome for each sample. [sd] Standard derivation of the normalized value of genes in chromosome for each sample.
 	- *coverage/*
 		- The folder where are saved Boxplots pictures referent the aneuploids analysis for each sample and chromosome.
