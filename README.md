@@ -129,7 +129,7 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
 
 ### Results
-The standard output of the CADIn is divided in 3 folders.
+The standard output of the CADIn is divided in 2 folders.
 
 - **vcf/**
 	- File in variant call format (VCF) with all single-nucleotide variants found on the chromosome(s).
