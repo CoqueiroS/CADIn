@@ -131,9 +131,6 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ### Results
 The standard output of the CADIn is divided in 3 folders.
 
-- **genescov/**
-	- Read coverage in selected regions of the annotation file.
-
 - **vcf/**
 	- File in variant call format (VCF) with all single-nucleotide variants found on the chromosome(s).
 
