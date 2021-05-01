@@ -167,17 +167,18 @@ The standard output of the CADIn is divided in 2 folders.
 	-t  Number of threads to SAMTOOLS run [INT] (default -t 1).
 	-o  Name for your output files (default -o result_CADIn).
 --- Type of analysis ---------------
-	-v  Variant calling analysis (1), or not (0) (default -v 1).
-	-d  Minimum number of reads to confirm each variant [INT] (default -d 5) (require '-v 1').
-	-k  Minimum SNP quality for each variant [INT] (default -k 10) (require '-v 1').
+	-v  Variant calling analysis checking both alleles (2), only variant (1), or not (0) (default -v 1).
+	-d  Minimum number of reads to confirm each variant [INT] (default -d 5) (require -v 1).
+	-k  Minimum SNP quality for each variant [INT] (default -k 10) (require -v 1).
 	-c  Genome/genes coverage analysis (1), or not (0) (default -c 1).
-	-x  Minimum covered length accepted in regions for calculating genome coverage (default -x 50) (require '-c 1').
-	-l  Minimum covered length accepted for the regions to be used for statistical analysis (default -l 50) (require '-c 1').
-	-n  Minimum number of regions accepted to validate chromosome aneuploidy. Number checked after Grubbs test (default -n 5) (require '-c 1').
+	-p  Genome coverage will be calculated using all genome(1), or annotated region (0) (default -p 0).
+	-x  Minimum covered length accepted in regions for calculating genome coverage (default -x 50) (require -c 1).
+	-l  Minimum covered length accepted for the regions to be used for statistical analysis (default -l 50) (require -c 1).
+	-n  Minimum number of regions accepted to validate chromosome aneuploidy. Number checked after Grubbs test (default -n 5) (require -c 1).
 --- Statistical Parameters ---------
 	-u  Determine if statistical analysis (1), or not (0), will be performed (default -u 1).
 	-m  Calculate using mean (0) or median (1) [INT] (default -m 1).
-	-g  Graphics generate with R: yes (1) or not (0) (default -g 1) (require '-u 1').
+	-g  Graphics generate with R: yes (1) or not (0) (default -g 1) (require -u 1).
 ------------------------------------
 ```
 **Main Input Files**
@@ -272,8 +273,8 @@ CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0 -u 0
 >[GNU General Public License v3.0](https://github.com/coqueiro-dos-santos/CADIn/blob/master/LICENSE.txt)
 ## Author
 - **Name:** Anderson Coqueiro-dos-Santos
-- **E-mail:** andersoncoqueiro8@gmail.com
-- **Github:** [github.com/coqueiro-dos-santos](https://github.com/coqueiro-dos-santos)
+- **E-mail:** coqueirophd@gmail.com
+- **Github:** [github.com/CoqueiroS](https://github.com/CoqueiroS)
 - **Research Gate:**[researchgate.net/profile/Anderson_Coqueiro-Dos-Santos](https://www.researchgate.net/profile/Anderson_Coqueiro-Dos-Santos)
 - **Mendeley:** [mendeley.com/profiles/anderson-coqueiro-dos-santos2](https://www.mendeley.com/profiles/anderson-coqueiro-dos-santos2/)
 - **Linkedin:** [linkedin.com/in/anderson-coqueiro-dos-santos-248789170](https://www.linkedin.com/in/anderson-coqueiro-dos-santos-248789170/)
