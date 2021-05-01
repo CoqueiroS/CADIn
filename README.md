@@ -1,5 +1,5 @@
 # **CADIn** - Chromosomal Amplification and Deletion Inference
-##### v0.8-alpha
+##### v1.0
 ###### *Citation: Citation: Coqueiro-dos-Santos, A. Reis-Cunha, JL, Bartholomeu, DC.*
 
 #
