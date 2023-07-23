@@ -1,0 +1,866 @@
+#!/home/coqueiro/miniconda3/envs/cadin/bin/perl -w
+################################################################################
+# File: CADIn (Chromosomal Amplification and Deletion Inference)
+# Author: Anderson Coqueiro-dos-Santos
+# Version 1.0
+################################################################################
+use strict;
+use File::Copy;
+use File::Temp;
+use sigtrap qw(die INT);
+use Statistics::R;
+use Getopt::Std;
+our ($opt_i, $opt_r, $opt_a, $opt_q, $opt_f, $opt_s, $opt_t, $opt_o, $opt_v, $opt_d, $opt_k, $opt_c, $opt_p, $opt_x, $opt_l, $opt_n, $opt_u, $opt_m, $opt_g);
+getopt('iraqfstovdkcplnumg');
+
+# Advanced Options
+my ($qualit, $filter, $tmp, $threds, $output);
+# Type of analysis
+my ($vcfsnp, $dp4var, $qltvcf, $covgen, $covall, $covset, $covlen, $nregio);
+# Statistical Parameters
+my ($usingr, $median, $graphr);
+# Others
+my ($maindir, $reference, $bed, %covGenes, @files, %coverage, %variant, %depGen);
+
+MAIN_DIR();
+
+TESTING_ARGUMENTS();
+
+unless (-d $tmp) { mkdir ($tmp); }
+
+my $tempdir = File::Temp->newdir(
+                TEMPLATE => 'tmpXXXX',
+                DIR => $tmp,
+                CLEANUP => 1
+);
+
+### RUN MPILEUP ###
+if ($vcfsnp != 0) {
+    $reference = File::Temp->new(
+                        TEMPLATE => 'ref_XXXX',
+                        DIR => $tempdir,
+                        SUFFIX => '.tmp',
+                        UNLINK => 1
+    );
+    copy($opt_r, $reference);
+}
+
+### RUN GENCOV ###
+if ($covgen == 1) {
+    $bed = File::Temp->new(
+                        TEMPLATE => 'bedb_XXXX',
+                        DIR => $tempdir,
+                        SUFFIX => '.tmp',
+                        UNLINK => 1
+    );
+    PREPARING_ANNOT($bed);
+}
+
+foreach (@files) { RUN_ANALYSIS($_); }
+
+if ($vcfsnp != 0) { COMPILATE_VCF();  }
+if ($covgen == 1) { COMPILATE_DEPTH(); }
+
+OPEN_R();
+
+### END ###
+
+####### PROCESS #######
+
+sub MAIN_DIR {
+    use Cwd 'abs_path';
+    $maindir = abs_path($0);
+    $maindir =~ s/cadin$//;
+}
+
+sub TESTING_ARGUMENTS {
+
+    # Advanced Options
+    $qualit = 30;
+    $filter = "gene";
+    $tmp = "$maindir/tmp";
+    $threds = 1;
+    $output = "result_CADIn";
+    # Type of analysis
+    $vcfsnp = 2;
+    $qltvcf = 10;
+    $dp4var = 5;
+    $covgen = 1;
+    $covall = 0;
+    $covset = 50;
+    $covlen = 50;
+    $nregio = 5;
+    # Statistical Parameters
+    $usingr = 1;
+    $median = 1;
+    $graphr = 1;
+
+    if (!($opt_i) || !($opt_r)  || !($opt_a)) {
+        print "ERROR: Parameter -i is required. Please check if input is file or directory with files (BAM format)\n" if (!$opt_i);
+        print "ERROR: Parameter -r is required. Please check the reference file (FASTA format)\n" if (!$opt_r);
+        print "ERROR: Parameter -a is required. Please check the annotation file (GFF format)\n" if (!$opt_a);
+
+        WARNING();
+
+    } else {
+        TESTING_INPUT();
+        $tmp = "$opt_s/tmp" if (defined $opt_s);
+        $qualit = $opt_q if (defined $opt_q);
+        $filter = $opt_f if (defined $opt_f);
+        $threds = $opt_t if (defined $opt_t);
+        $output = $opt_o if (defined $opt_o);
+        $vcfsnp = $opt_v if (defined $opt_v);
+        $dp4var = $opt_d if (defined $opt_d);
+        $qltvcf = $opt_k if (defined $opt_k);
+        $covgen = $opt_c if (defined $opt_c);
+        $covall = $opt_p if (defined $opt_p);
+        $covset = $opt_x if (defined $opt_x);
+        $covlen = $opt_l if (defined $opt_l);
+        $nregio = $opt_n if (defined $opt_n);
+        $usingr = $opt_u if (defined $opt_u);
+        $median = $opt_m if (defined $opt_m);
+        $graphr = $opt_g if (defined $opt_g);
+    }
+    print "--- Running ---------------------\n";
+    print "Input(-i):\t$opt_i\n";
+    print "Reference(-r):\t$opt_r\n";
+    print "Annotation(-a):\t$opt_a\n";
+    print "MAP QUAL(-q):\t$qualit\n";
+    print "Filter(-f):\t$filter\n";
+    print "Temporary(-s):\t$tmp\n";
+    print "Threads(-t):\t$threds\n";
+    print "Output(-o):\t$output\n";
+    print "SNPs(-v):\t$vcfsnp\n";
+    if ($vcfsnp != 0) {
+        print "Depth(-d):\t$dp4var\n";
+        print  "SNP QUAL(-k):\t$qltvcf\n"; }
+    print "Coverage(-c):\t$covgen\n";
+    if ($covgen == 1) {
+        print "Genome ALL(-p):\t$covall\n";
+        print "Length GEN(-x):\t$covset\n";
+        print "Length REG(-l):\t$covlen\n";
+        print "Number REG(-n):\t$nregio\n"; }
+    print "Statistics(-u):\t$usingr\n";
+    if ($usingr == 1) {
+        print "Median(-m):\t$median\n";
+        print "Graphics (-g):\t$graphr\n";
+    }
+    print "------------------------------------\n";
+}
+
+sub WARNING {
+    print "--- Parameters ---------------------\n";
+    print "\t-i  BAM file(s).\n";
+    print "\t-r  Fasta file containing reference sequence.\n";
+    print "\t-a  GFF file containing annotation information.\n";
+    print "--- Advanced Options ---------------\n";
+    print "\t-q  Filter input(s) by mapping quality [INT] (default -q $qualit).\n";
+    print "\t-f  Annotated region to be filtered ('gene', 'CDS', 'mRNA', 'tRNA', 'etc') (default -f $filter).\n";
+    print "\t-s  Directory to save the temporary files (default -s $tmp).\n";
+    print "\t-t  Number of threads to SAMTOOLS run [INT] (default -t $threds).\n";
+    print "\t-o  Name for your output files (default -o $output).\n";
+    print "--- Type of analysis ---------------\n";
+    print "\t-v  Variant calling analysis checking both alleles (2), only variant (1), or not (0) (default -v $vcfsnp).\n";
+    print "\t-d  Minimum number of reads to confirm each variant [INT] (default -d $dp4var) (require '-v 1').\n";
+    print "\t-k  Minimum SNP quality for each variant [INT] (default -k $qltvcf) (require '-v 1').\n";
+    print "\t-c  Genome/regions coverage analysis (1), or not (0) (default -c $covgen).\n";
+    print "\t-p  Genome coverage will be calculated using all genome(1), or annotated region (0) (default -p $covall).\n";
+    print "\t-x  Minimum covered length accepted in regions for calculating genome coverage (default -x $covset) (require '-c 1').\n";
+    print "\t-l  Minimum covered length accepted in regions to be used for statistical analysis (default -l $covlen) (require '-c 1').\n";
+    print "\t-n  Minimum number of regions accepted to validate chromosome aneuploidy. Number checked after Grubbs test (default -n $nregio) (require '-c 1').\n";
+    print "--- Statistical Parameters ---------\n";
+    print "\t-u  Determine if statistical analysis (1), or not (0), will be performed (default -u $usingr).\n";
+    print "\t-m  Calculate using mean (0) or median (1) [INT] (default -m $median).\n";
+    print "\t-g  Graphics generate with R: yes (1) or not (0) (default -g $graphr) (require '-u 1').\n";
+    die "------------------------------------\n";
+}
+
+sub TESTING_INPUT {
+
+    if (-d $opt_i) {
+
+        opendir(DIR,$opt_i);
+        my @DIR = readdir(DIR);
+        closedir(DIR);
+
+        foreach (@DIR) {
+            chomp $_;
+            next unless ($_ =~ /\.([Bb][Aa][Mm])$/);
+            next if ($_ =~ /^samtools.\d+.\d+.tmp.\d+$/);
+
+            if (defined $files[0]) { push @files, "$opt_i/$_";
+            } else { $files[0] = "$opt_i/$_"; }
+        }
+    } elsif (-f $opt_i) { $files[0] = $opt_i;
+    } else {
+        print "ERROR: Parameter -i is required. Please check if input is file or directory with files (BAM format).\n";
+        WARNING();
+    }
+    unless (-f $opt_r) {
+        print "ERROR: Parameter -r is required. Please check the reference file (FASTA format)\n";
+        WARNING();
+    }
+    unless (-f $opt_a) {
+        print "ERROR: Parameter -a is required. Please check the annotation file (GFF format)\n";
+        WARNING();
+    }
+}
+
+sub RUN_ANALYSIS {
+
+    my $input = $_[0];
+
+    my @split = split("\/",$input); my $file = $split[$#split]; $file =~ s/\.([Bb][Aa][Mm])//g;
+
+    ### PREPARING BAM FILE ###
+
+    my $sorted = File::Temp->new(
+                        TEMPLATE => 'sort_XXXX',
+                        DIR => $tempdir,
+                        SUFFIX => '.tmp',
+                        UNLINK => 1
+    );
+
+    system("samtools sort -@ $threds $input > $sorted");
+    system("samtools index $sorted");
+
+    ### RUN MPILEUP ###
+    if ($vcfsnp != 0) {
+
+        my $rgns = File::Temp->new(
+                            TEMPLATE => 'rgns_XXXX',
+                            DIR => $tempdir,
+                            SUFFIX => '.tmp',
+                            UNLINK => 1
+        );
+
+        REGION_FASTA($rgns);
+
+        my $plod = File::Temp->new(
+                            TEMPLATE => 'plod_XXXX',
+                            DIR => $tempdir,
+                            SUFFIX => '.tmp',
+                            UNLINK => 1
+        );
+
+        open(PDY,">",$plod); print PDY "* * * * 2"; close(PDY);
+
+        my $pathVCF = NEW_PATH("vcf");
+
+        my $varCall = "$pathVCF/$file\.vcf";
+
+        system("bcftools mpileup -q $qualit --skip-indels -f $reference $sorted -R $rgns --threads $threds | bcftools call -m -v  --threads $threds --ploidy-file $plod -Ov -o $varCall");
+    }
+
+    ### RUN GENCOV ###
+    if ($covgen == 1) {
+
+        if ($covall == 1) { 
+            my $genAll = GENOME_COVERAGE($sorted);
+            $depGen{$file} = $genAll;
+        }
+
+        my $gencov = File::Temp->new(
+                            TEMPLATE => 'gencov_XXXX',
+                            DIR => $tempdir,
+                            SUFFIX => '.tmp',
+                            UNLINK => 1
+        );
+
+        system("samtools depth -Q $qualit -b $bed $sorted -aa > $gencov");
+
+        my $depCov = File::Temp->new(
+                    TEMPLATE => 'depth--_'.$file.'--_XXXX',
+                    DIR => $tempdir,
+                    SUFFIX => '.tmp',
+                    UNLINK => 0
+        );
+        GENCOV_MEMORY($gencov,$depCov);
+
+        NEW_PATH();
+    }
+}
+
+sub REGION_FASTA {
+
+    my ($regions) = @_;
+
+    open(REG,">",$regions);
+
+    open(REF, "$reference");
+
+    while(<REF>) {
+
+        chomp($_);
+
+        next unless ($_ =~ /^>/);
+
+        my @col = split(/\s+/,$_);
+
+        $col[0] =~ s/>//g;
+
+        print REG $col[0],"\n";
+    }
+    close(REG);
+}
+
+sub COMPILATE_VCF {
+
+    my $vcfpath = "$output/vcf/";
+
+    opendir(DIR,$vcfpath);
+    my @DIRVCF = readdir(DIR);
+    closedir(DIR);
+
+    foreach my $file (@DIRVCF) {
+
+        next unless ($file =~ /\.vcf$/);
+
+        open (IN, "$vcfpath/$file");
+
+        while (<IN>) {
+
+            next if ($_ =~ /^#/);
+
+            my ($ref, $snp);
+
+            if ($_ =~ /DP4=(\d+),(\d+),(\d+),(\d+);/) { $ref = $1+$2; $snp = $3+$4; }
+
+            next if ($ref < $dp4var || $snp < $dp4var);
+
+            my @split = split(/\s+/,$_);
+
+            next if ($split[4] =~ /,/);
+
+            next if ($split[5] < $qltvcf);
+            
+            $file =~ s/\.vcf//g;
+
+            my $chr = $split[0];
+
+            my $freq = sprintf("%.2f", $snp/($ref+$snp));
+
+            if (defined $variant{"$file;$chr;$freq"}) { $variant{"$file;$chr;$freq"}++;
+            } else { $variant{"$file;$chr;$freq"} = 1; }
+
+            if ($vcfsnp == 2) {
+                
+                $freq = sprintf("%.2f", $ref/($ref+$snp));
+
+                if (defined $variant{"$file;$chr;$freq"}) { $variant{"$file;$chr;$freq"}++;
+                } else { $variant{"$file;$chr;$freq"} = 1; }
+
+            }
+
+        }
+        close(IN);
+    }
+
+    my $combine = "$output/frequencySNPs.csv";
+
+    open (COMBINE,">",$combine) or die("Can't create to \"$combine\": $!\n");
+
+    print COMBINE "COD\tCHR\tFREQ\tCOUNT\n";
+
+    foreach (keys %variant) { my @sep = split(";",$_); print COMBINE $sep[0],"\t",$sep[1],"\t",$sep[2],"\t",$variant{$_},"\n"; }
+
+    close(COMBINE);
+}
+
+sub PREPARING_ANNOT {
+
+    my ($gff) = @_;
+
+    open (SAVE,">",$bed);
+
+    open (GFF, $opt_a) or die "Could not open file '$opt_a'. $!";
+
+    while (<GFF>) {
+
+        next if ($_ =~ /^#/);
+
+        chomp($_);
+
+        my @col = split(/\s+/,$_);
+
+        next unless ( (lc($col[2]) eq $filter) || (uc($col[2]) eq $filter));
+
+        my $id = $col[8];
+        if ($id ne $col[$#col]) { for (my $i = 9; $i <= $#col; $i++) { $id .= "_$col[$i]"; } }
+
+        print SAVE $col[0],"\t",$col[3]-1,"\t",$col[4],"\t",$id,"\n";
+    }
+    close(SAVE); close(GFF);
+}
+
+sub GENCOV_MEMORY {
+
+    my ($gcov,$depfile) = @_;
+
+    open(DEPTH, $gcov) or die "Could not open temporary file!";
+
+    my $last;
+
+    while (<DEPTH>) {
+
+        chomp($_);
+
+        my @col = split(/\s+/,$_);
+
+        unless (defined $last) { $last = $col[0]; }
+
+        unless ($last =~ /^$col[0]$/) { ANNOTATION_RECOVERY($last,$depfile); }
+
+        $covGenes{$col[1]} = $col[2];
+        $last = $col[0];
+    }
+    close(DEPTH);
+    ANNOTATION_RECOVERY($last,$depfile);
+}
+
+sub ANNOTATION_RECOVERY {
+
+    my ($cod,$depSave) = @_;
+
+    open (SAVE,">>",$depSave);
+    open (ANNOTATION, $bed) or die "Could not open temporary file!";
+
+    while (<ANNOTATION>) {
+
+        chomp($_);
+        my @col = split(/\s+/,$_);
+
+        next unless ($col[0] =~ /^$cod$/);
+
+        my $count = 0; my @values;
+
+        for (my $i = $col[1]+1; $i <= $col[2]; $i++) {
+
+            unless (defined $covGenes{$i}) { die "Could not found position $i ($col[0]) in tables [Coverage]!"}
+
+            if ($covGenes{$i} > 0) { $count++; }
+
+            if (defined $values[0]) { push @values, $covGenes{$i};
+            } else { $values[0] = $covGenes{$i}; }
+        }
+
+        my $cal;
+        if ($median == 1) { $cal = CALCULATE_MEDIAN(\@values); } else { $cal = CALCULATE_MEAN(\@values); }
+        my $map = $count/scalar(@values)*100;
+
+        print SAVE $cod,"_",$col[1]+1,"-",$col[2],"\t";
+        printf SAVE ("%.2f\t%.2f\t", $cal, $map);
+        print SAVE $col[3],"\n";
+    }
+    close (ANNOTATION);
+    close (SAVE);
+    undef %covGenes;
+}
+
+sub COMPILATE_DEPTH {
+
+    my $combine = "$output/depthRegion.csv";
+
+    open(COMBINE,'>'.$combine) or die("Can't create to \"$combine\": $!\n");
+
+    print COMBINE "COD\tCHR\tDEP\tCOV\tNOR\tID\n";
+
+    opendir(DIR,$tempdir);
+    my @PATHCOV = readdir(DIR);
+    closedir(DIR);
+
+    foreach my $file (@PATHCOV) {
+
+        next unless ($file =~ m/^depth/);
+
+        my (@values, $cal);
+
+        open(IN, "$tempdir/$file") or die "Could not open file '$file'. $!";
+
+        if (-z "$tempdir/$file") { die "The file is empty '$file'. $!"; }
+
+        while (<IN>) {
+
+            my @col = split(/\s+/,$_);
+
+            next if ($col[2] < $covset);
+
+            if ($col[3] =~ /^ID=/) { my @id = split(";",$col[3]);
+                $id[0] =~ s/ID=//g; $col[3] = $id[0];
+            }
+
+            if (defined $coverage{$col[0]}) { $coverage{$col[0]} .= "-".$col[3];
+            } else { $coverage{$col[0]} = "$col[1];$col[2];$col[3]"; }
+
+            if ($covall == 1) {
+            } elsif (defined $values[0]) { push @values, $col[1];
+            } else { $values[0] = $col[1];}
+        }
+        close(IN);
+
+        my @codFile = split("--_",$file);
+
+        if ($covall == 1) { $cal = $depGen{$codFile[1]};
+        } elsif ($median == 1) { $cal = CALCULATE_MEDIAN(\@values);
+        } else { $cal = CALCULATE_MEAN(\@values); }
+
+        foreach my $key (keys %coverage) {
+            my @col = split(";",$coverage{$key});
+
+            $key =~ s/(\_(\d+)\-(\d+))$//g;
+
+            print COMBINE $codFile[1],"\t",$key,"\t",$col[0],"\t",$col[1],"\t",$cal,"\t",$col[2],"\n";
+        }
+        undef %coverage;
+    }
+    close(COMBINE);
+}
+
+sub GENOME_COVERAGE {
+
+    my $sortFile = $_[0];
+
+    my ($num_seq, $num_base) = (0, 0);
+
+    my @GENALLCOV = `samtools coverage $sortFile`;
+
+    foreach (@GENALLCOV) {
+        next if ($_ =~ /^#/);
+
+        my @chrCov = split(/\s+/,$_);
+        
+        $num_seq++;
+        
+        $num_base+=$chrCov[6];
+    }
+
+    return($num_base/$num_seq);
+}
+
+sub NEW_PATH {
+    my ($path) = @_;
+    unless (-d $output) { mkdir ($output); }
+    
+    if (defined $path) {
+        unless (-d "$output/$path") { mkdir ("$output/$path"); }
+        return("$output/$path");
+    }
+}
+
+sub CALCULATE_MEAN {
+    my $i = 0;
+
+    my @tmp = @{$_[0]};
+
+    foreach (@tmp) {
+        chomp($_);
+        $i += $_;
+    }
+
+    my $result = $i/scalar(@tmp);
+
+    return ($result);
+}
+
+sub CALCULATE_MEDIAN {
+
+    my $result;
+
+    my @tmp = @{$_[0]};
+
+    my @sorted = sort { $a <=> $b } @tmp;
+
+    if (scalar(@sorted)%2 == 0) {
+        my $pos = scalar(@sorted)/2;
+        $result = $sorted[$pos-1] + $sorted[$pos];
+        $result/=2;
+    } else {
+        my $pos = scalar(@sorted)+1;
+        $pos/=2;
+        $result = $sorted[$pos];
+    }
+
+    return ($result);
+}
+
+sub OPEN_R {
+
+    ### Start R
+
+    my $R = Statistics::R->new();
+
+    $R -> startR;
+
+    ### Install Packages
+
+    if ($covgen == 1) {
+        $R -> run(q`if(!require(outliers)){ install.packages("outliers")}`);
+    }
+
+    if ($graphr == 1) {
+        $R -> run(q`if(!require(ggplot2)){ install.packages("ggplot2")}`)
+    }
+
+    ### Libraries
+
+    if ($covgen == 1) {
+        $R -> run(q`library(outliers)`);
+    }
+
+    if ($graphr == 1) {
+        $R -> run(q`library(ggplot2)`);
+    }    
+
+    if ($vcfsnp != 0 && $graphr == 1) { my $ref = RUN_R_VARIANT_SNPS(\$R); $R = ${$ref}; }
+
+    if ($covgen == 1) { my $ref = RUN_R_COVERAGE(\$R); $R = ${$ref}; }
+    
+    ### ENDING 
+
+    $R -> stop();
+
+}
+
+sub RUN_R_VARIANT_SNPS {
+
+    my $R = ${$_[0]};
+
+    ### ARGUMENTS
+
+    my $inR = "$output/frequencySNPs.csv";
+    my $pathR = NEW_PATH("variantCalling");
+
+    $R -> set('infile', $inR);
+    $R -> set('outdir', $pathR);
+
+    ### ANALYSIS
+
+    $R -> run(q`input <- read.table(file = infile, header = TRUE, sep = "\t")`);
+
+    ### GRAPHICS
+
+    $R -> run(
+        q`pdf(paste(c(outdir,"Global.pdf"),collapse = "/"), width = 9, height = 6)
+        for (var in unique(input$COD)) {
+            print(
+                ggplot(input[input$COD == var,], aes(y=COUNT, x=FREQ)) + facet_wrap(~COD, scales = "free") +
+                    geom_col() + xlim(0,1) + 
+                    theme(axis.title = element_blank(), axis.text = element_text(size=16),
+                        strip.text.x = element_text(size = 20), aspect.ratio = 3/5)
+            )
+        }
+        dev.off()`
+    );
+
+    $R -> run(
+        q`hgh <- 1.5*(round(length(unique(input$CHR))/4))
+        pdf(paste(c(outdir,"Chromosomes.pdf"),collapse = "/"), width = 9, height = hgh)
+        for (var in unique(input$COD)) {
+            print(
+                ggplot(input[input$COD == var,], aes(y=COUNT, x=FREQ)) +
+                    facet_wrap(~CHR, scales = "free", ncol = 4) +
+                    geom_col() + xlim(0,1) + labs(title = var) + 
+                    theme(axis.title = element_blank(),strip.text.x = element_text(size = 10))
+            )
+        }
+        dev.off()`
+    );
+
+    return(\$R);
+}
+
+sub RUN_R_COVERAGE {
+
+    my $R = ${$_[0]};
+
+    ### PREPARING
+
+    my $inR = "$output/depthRegion.csv";
+    my $pathR = NEW_PATH("readDepthCov");
+
+    ### ARGUMENTS
+
+    $R -> set('infile', $inR);
+    $R -> set('outdir', $pathR);
+    $R -> set('covlen', $covlen);
+    $R -> set('nregio', $nregio);
+
+    $R -> run(
+        q`input <- read.table(file = infile, header = TRUE, sep = "\t")
+        input <- input[input$COV >= covlen,]
+        input$DEP <- input$DEP/input$NOR
+        input <- input[,-c(4,5)]`
+    );
+
+    ### REMOVING OUTLIERS
+
+    $R -> run(
+        q`no_outlier <- data.frame(COD = c(NA), CHR = c(NA), DEP = c(NA), ID = c(NA))`,
+
+        q`for (i in unique(input$COD)) {
+            tmp_COD = input[input$COD ==  i,]
+
+            for (j in unique(tmp_COD$CHR)) {
+                loop = 0
+                x = tmp_COD[tmp_COD$CHR ==  j,]
+    
+                while (loop == 0) {
+                    if (length(x$DEP) < nregio ) { loop = 1
+                    } else if (grubbs.test(x$DEP)$p.value < 0.05) { x = x[x[,3] != outlier(x$DEP),]
+                    } else { loop = 1}
+                }                
+                if (length(x$DEP) >= nregio ) { no_outlier <- rbind(no_outlier,x) }    
+            }
+        }`,
+        q`no_outlier <- no_outlier[-c(1),]`
+    );
+
+    $R -> run(
+        q`if (nrow(no_outlier) != 0) {
+            outfile <- paste(c(outdir,"depth-Normalized.csv"),collapse = "/")
+            write.table(no_outlier, file = outfile, sep = "\t", row.names = FALSE, append = FALSE)
+        }`
+    );
+
+    ###
+
+    if (-e "$pathR/depth-Normalized.csv") {
+
+        ### WILCOXON SIGNED RANK TEST
+
+        $R -> run(
+            q`result_wilcoxon <- data.frame(library = c(NA), chromosome = c(NA),
+                             p_less_0.5 = c(NA), p_less_1 = c(NA),
+                             p_greater_1 = c(NA), p_greater_1.5 = c(NA),
+                             p_greater_2 = c(NA), p_greater_2.5 = c(NA),
+                             p_greater_3 = c(NA), mean = c(NA), median = c(NA), sd = c(NA))`,
+
+            q`for (i in unique(no_outlier$COD)) {
+                for (j in unique(no_outlier$CHR)) {
+                    x <- no_outlier[no_outlier$COD == i & no_outlier$CHR == j,]
+                    
+                    rl05 <- wilcox.test(x$DEP, mu = 0.5, alternative = "less")
+                    rl1 <- wilcox.test(x$DEP, mu = 1, alternative = "less")
+                    rg1 <- wilcox.test(x$DEP, mu = 1, alternative = "greater")
+                    rg15 <- wilcox.test(x$DEP, mu = 1.5, alternative = "greater")
+                    rg2 <- wilcox.test(x$DEP, mu = 2, alternative = "greater")
+                    rg25 <- wilcox.test(x$DEP, mu = 2.5, alternative = "greater")
+                    rg3 <- wilcox.test(x$DEP, mu = 3, alternative = "greater")
+    
+                    result_wilcoxon <- rbind(result_wilcoxon,c(i, j,rl05$p.value,
+                                                rl1$p.value, rg1$p.value, rg15$p.value,
+                                                rg2$p.value, rg25$p.value, rg3$p.value,
+                                                mean(x$DEP), median(x$DEP), sd(x$DEP)))
+                }
+            }`,
+            q`result_wilcoxon <- result_wilcoxon[-c(1),]`,
+
+            q`outfile <- paste(c(outdir,"wilcoxon-signed-Rank.csv"),collapse = "/")
+            write.table(result_wilcoxon, file = outfile, sep = "\t", row.names = FALSE, append = FALSE)`
+        );
+
+        ### PAIRWISE TEST
+
+        $R -> run(
+            q`pairwiseList <- list()
+            for (cod in unique(no_outlier$COD)) {
+                filt <- no_outlier[no_outlier$COD == cod,]
+                pairwiseList[[cod]] <- pairwise.wilcox.test(filt$DEP, filt$CHR , p.adjust.method = "bonferroni")$p.value
+            }`,
+
+            q`outfile <- paste(c(outdir,"pairwise-Test.txt"),collapse = "/")
+            sink(outfile)
+            print(pairwiseList)
+            sink()`
+        );
+
+        ### GRAPHICS
+
+        if ($graphr == 1) {
+
+            ### [BOXPLOT]
+
+            $R -> run(
+                q`max_y = round(max(no_outlier$DEP))+1`,
+                q`wid <- 1+(length(unique(no_outlier$CHR))/2)`,
+                q`hgh <- max_y+2`,
+
+                q`pdf(paste(c(outdir,"samples.pdf"),collapse = "/"), wid = wid, height = hgh)
+                for (var in unique(no_outlier$COD)) {
+                    print(    
+                        ggplot(no_outlier[no_outlier$COD == var,], aes(x = as.factor(CHR), y = DEP)) +
+                            facet_wrap(~COD, scales = "free") +
+                            geom_boxplot(outlier.size = 0.5, outlier.shape = 1) + 
+                            geom_hline(aes(yintercept=1), colour = "red") + ylim(0, max_y) +
+                            theme(axis.title = element_blank(), axis.text.y = element_text(size = 16),
+                                axis.text.x = element_text(size = 12, angle = 90, vjust = 0.5, hjust = 1),
+                                strip.text.x = element_text(size = 24))
+                    )
+                }
+                dev.off()`
+            );
+
+            ### [HEATMAP]
+
+            $R -> run(
+                q`wid <- 2+(length(unique(result_wilcoxon$library))/2)
+                hgh <- 1+(length(unique(result_wilcoxon$chromosome))/2)
+                pdf(paste(c(outdir,"heatmap.pdf"),collapse = "/"), wid = wid, height = hgh)
+                plot(
+                    ggplot(result_wilcoxon, aes(x = library, y = as.factor(chromosome), fill = as.numeric(median))) + 
+                        geom_tile(color = "black") + labs(x = "Sample", y = "Chromosome") +
+                        scale_fill_gradientn(colours = c("darkblue","white","green4","yellow","red","darkred"),
+                                            breaks=c(0:5), limits=c(0,5)) + 
+                        theme(axis.title = element_text(size = 12), axis.text.x = element_text(size = 11),
+                            legend.title = element_blank(), legend.text = element_text(size = 12), legend.position="right")
+                )
+                dev.off()`
+            );
+
+            ### GRAPHIC [PAIRWISE]
+
+            $R -> run(
+                q`hgh <- length(unique(no_outlier$CHR))/2
+                wid <- 1+hgh
+                pdf(paste(c(outdir,"pairwise.pdf"),collapse = "/"), wid = wid, height = hgh)
+
+                for (cod in names(pairwiseList)) {
+                    filt <- pairwiseList[[cod]]
+                    pwTest <- data.frame(CHR1 = (NA), CHR2 = (NA), ADP = (NA))
+                
+                    for (i in 1:length(colnames(filt))) {
+                    vcol <- colnames(filt)[i]
+                
+                        for (vrow in colnames(filt)[-c(1:i)]) {
+                            if (filt[vrow,vcol] < 0.01){pwTest <- rbind(pwTest, c(vrow,vcol,"< 0.01"))
+                            } else if (filt[vrow,vcol] < 0.05){pwTest <- rbind(pwTest, c(vrow,vcol,"< 0.05"))
+                            } else if (filt[vrow,vcol] < 0.10){pwTest <- rbind(pwTest, c(vrow,vcol,"< 0.10"))
+                            } else { pwTest <- rbind(pwTest, c(vrow,vcol,"> 0.10")) }
+                        }
+                    }
+                
+                    heatCol = c("#2A6A99","#3C97DB","#9FCBED","#DDDDDD")
+
+                    if (!'> 0.10' %in% unique(pwTest[-c(1),3])) { heatCol = heatCol[-(4)] }
+                    if (!'< 0.10' %in% unique(pwTest[-c(1),3])) { heatCol = heatCol[-(3)] } 
+                    if (!'< 0.05' %in% unique(pwTest[-c(1),3])) { heatCol = heatCol[-(2)] }
+                    if (!'< 0.01' %in% unique(pwTest[-c(1),3])) { heatCol = heatCol[-(1)] } 
+
+                    plot(
+                        ggplot(pwTest[-c(1),], aes(x=CHR1, y=CHR2, fill=ADP)) +
+                            geom_tile(color="black") + labs(title = cod) + theme_light() +
+                            scale_fill_manual(values = heatCol) + 
+                            theme(axis.title = element_blank(), axis.text.y = element_text(size = 12),
+                                axis.text.x = element_text(size = 12, angle = 90, vjust = 0.5, hjust = 1),
+                                title = element_text(size = 14), legend.title = element_blank())
+                    )
+                }
+                dev.off()`
+            );
+
+        }
+        
+    } else { print "No calculate Wilcoxon rank test! Doesn't have values enough.\n";}
+
+    return(\$R);
+}
