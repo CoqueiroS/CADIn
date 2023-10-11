@@ -126,7 +126,7 @@ CADIn uses only the reads that map to the input FASTA genome sequence, even if t
 
 **Basic command-line**
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
 
 ### Results
@@ -187,7 +187,7 @@ Three files are needed for CADIn to work, BAM, FASTA and GFF files. The `-i` wor
 
 *Essential Arguments*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
 
 **Mapping Quality**
@@ -196,12 +196,12 @@ The flag `-q` is used to filter reads for quality. CADIn filters with mapping qu
 
 *Previous filtered by mapping quality*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 0
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 0
 ```
 
 *Filtering by mapping quality*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 20
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -q 20
 ```
 
 **Annotated regions**
@@ -210,7 +210,7 @@ GFF file has different annotation information, as Gene, CDS and mRNA, and only o
 
 *Calculate coverage using CDS regions*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -f CDS
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -f CDS
 ```
 
 **Temporary directory**
@@ -219,7 +219,7 @@ CADIn will be to create a directory in the same path where it's installed. Howev
 
 *Save temporary files in HOME path*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -s $HOME/test/tmp/
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -s $HOME/test/tmp/
 ```
 
 **Directory with results**
@@ -228,7 +228,7 @@ The software has the standard output directory `result_CADIn/`. With `-o` will b
 
 *Change output directory*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -o test_Nov_2019/
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -o test_Nov_2019/
 ```
 
 **Selecting analysis**
@@ -237,34 +237,34 @@ The variant calling and depth coverage analysis can be done separately. The flag
 
 *Only variant calling analysis*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -c 0
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -c 0
 ```
 
 *Only coverage analysis*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0
 ```
 
 You may also prefer to use only variant calling or coverage data without to generate statistics `-u` or graphics `-g` results. But, if the statistical results `-u` isn't generated, the graphics won't be either.
 
 *No statistical analysis and graphics*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -u 0
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -u 0
 ```
 
 *Only statistical analysis without to generate graphics*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -g 0
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -g 0
 ```
 
 *Only statistical analysis of the variant calling data*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -c 0 -g 0
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -c 0 -g 0
 ```
 
 *Only coverage analysis and no statistics*
 ```
-CADIn -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0 -u 0
+perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0 -u 0
 ```
 
 ## Citation
