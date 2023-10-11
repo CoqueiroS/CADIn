@@ -274,7 +274,7 @@ perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff -v 0 -u 0
 ## Author
 - **Name:** Anderson Coqueiro-dos-Santos
 - **E-mail:** coqueirophd@gmail.com
-- **Github:** [github.com/CoqueiroS](https://github.com/CoqueiroS)
+- **Github:** [github.com/CoqueiroS](https://github.com/coqueiro-dos-santos)
 - **Research Gate:**[researchgate.net/profile/Anderson_Coqueiro-Dos-Santos](https://www.researchgate.net/profile/Anderson_Coqueiro-Dos-Santos)
 - **Mendeley:** [mendeley.com/profiles/anderson-coqueiro-dos-santos2](https://www.mendeley.com/profiles/anderson-coqueiro-dos-santos2/)
 - **Linkedin:** [linkedin.com/in/anderson-coqueiro-dos-santos-248789170](https://www.linkedin.com/in/anderson-coqueiro-dos-santos-248789170/)
