@@ -1,4 +1,4 @@
-#!/home/coqueiro/miniconda3/envs/cadin/bin/perl -w
+#!/usr/bin/perl -w
 ################################################################################
 # File: CADIn (Chromosomal Amplification and Deletion Inference)
 # Author: Anderson Coqueiro-dos-Santos
