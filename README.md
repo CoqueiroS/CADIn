@@ -189,6 +189,20 @@ Three files are needed for CADIn to work, BAM, FASTA and GFF files. The `-i` wor
 ```
 perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
+**Mapping Quality**
+
+The flag `-q` is used to filter reads for quality. CADIn filters with mapping quality 30 in standard mode. In case, when the input already have been filtered by mapping quality, you can put `-q 0`, this is help to reduce process time.
+
+*Using BWA for short reads*
+```
+bwa mem REFERENCE.fasta FILE_R1.fastq FILE_R2.fastq | samtools view -bS > FILE.bam
+```
+
+*Using BWA for long reads*
+```
+bwa mem -k 15 -W 30 -r 10 -B 2 -O 2 -L 0 REFERENCE.fasta FILE_R1.fastq FILE_R2.fastq | samtools view -bS > FILE.bam
+```
+*`CADIn isn't restricted to those tools and metrics used`*
 
 **Mapping Quality**
 
