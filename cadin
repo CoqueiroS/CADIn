@@ -448,9 +448,12 @@ sub ANNOTATION_RECOVERY {
         if ($median == 1) { $cal = CALCULATE_MEDIAN(\@values); } else { $cal = CALCULATE_MEAN(\@values); }
         my $map = $count/scalar(@values)*100;
 
-        print SAVE $cod,"_",$col[1]+1,"-",$col[2],"\t";
-        printf SAVE ("%.2f\t%.2f\t", $cal, $map);
-        print SAVE $col[3],"\n";
+        if (defined($cal) && $cal > 0) {
+            print SAVE $cod,"_",$col[1]+1,"-",$col[2],"\t";
+            printf SAVE ("%.2f\t%.2f\t", $cal, $map);
+            print SAVE $col[3],"\n";
+        }
+
     }
     close (ANNOTATION);
     close (SAVE);
