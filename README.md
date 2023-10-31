@@ -132,26 +132,27 @@ perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ### Results
 The standard output of the CADIn is divided in 2 folders.
 
-- **vcf/**
-	- File in variant call format (VCF) with all single-nucleotide variants found on the chromosome(s).
+- *depthRegion.csv*
+	- Tabular file with gene coverage data. It has the proportion of each gene covered by the reads and median read depth coverage of each gene.
+	- Columns: [COD] Sample name. [CHR] Chromosome location of the gene. [DEP] Median number of reads for each position of the gene. [COV] Proportion of the gene that has reads. [NOR] Normalized median coverage of all genes across the sample. [ID] Gene ID as reported in the gff file.
+- *frequencySNPs.csv*
+	- Frequency of the heterozygous single nucleotide variants per chromosome. Each line reports a chromosomal position containing a heterozygous SNV with two, and only two variants.
+	- Columns: [COD] Sample name. [CHR] Chromosome analyzed. [FREQ] Frequency of heterozygous SNVs in the corresponding chromosome. [COUNT] Number of SNVs with that frequency.
 
-- **statistical/**
-	- *combineCoverage.csv*
-		- Tabular file with gene coverage data. It has the proportion of each gene covered by the reads and median read depth coverage of each gene.
-		- Columns: [COD] Sample name. [CHR] Chromosome location of the gene. [DEP] Median number of reads for each position of the gene. [COV] Proportion of the gene that has reads. [NOR] Normalized median coverage of all genes across the sample. [ID] Gene ID as reported in the gff file.
-	- *frequencySNPs.csv*
-		- Frequency of the heterozygous single nucleotide variants per chromosome. Each line reports a chromosomal position containing a heterozygous SNV with two, and only two variants.
-		- Columns: [COD] Sample name. [CHR] Chromosome analyzed. [FREQ] Frequency of heterozygous SNVs in the corresponding chromosome. [COUNT] Number of SNVs with that frequency.
-	- *normalized.Cov.csv*
+- **readDepthCov/**
+	- The folder where are saved Boxplots pictures referent the aneuploids analysis for each sample and chromosome.
+	- *depth-Normalized*
 		- Table with normalized depth values of each gene after Grubb's test. Genes with discrepant values are removed from this table.
 		- Columns: [COD] Sample name. [CHR] Chromosome location of the gene. [DEP] Normalized median number of reads for each position of the gene. Normalization are performed with the depth of the sample. [ID] Gene ID as reported in the gff file.
-	- *wilcoxon_rank.Cov.csv*
+	- *wilcoxon-signed-Rank.csv*
 		- Chromosomal somy variation statistical validation, with the Mann-Whitney-Wilcoxon tests.
-		- Columns: [library] Which sample is represented. [chromosome] Chromosome analyzed. [p_less/grater_”n”] P-value of Mann-Whitney-Wilcoxon test for values less /greater than “n”. [mean] Average of the normalized value of genes in chromosome for each sample. [median] Median of the normalized value of genes in chromosome for each sample. [sd] Standard derivation of the normalized value of genes in chromosome for each sample.
-	- *coverage/*
-		- The folder where are saved Boxplots pictures referent the aneuploids analysis for each sample and chromosome.
-	- *frequency/*
-		- The folder where are saved all Barplot graphics with the frequency count of the heterozygous single nucleotide variants.
+		- Columns: [library] Which sample is represented. [chromosome] Chromosome analyzed. [p_less/grater_”n”] P-value of Mann-Whitney-Wilcoxon test for values less /greater than “n”. [mean] Average of the normalized value of genes in chromosome for each sample. [median] Median of the normalized value of genes in chromosome for each sample. [sd] Standard derivation of the normalized value of genes in chromosome for each sample.	
+	
+- **variantCalling/**
+	- The folder where are saved all Barplot graphics with the frequency count of the heterozygous single nucleotide variants.
+
+- **vcf/**
+	- File in variant call format (VCF) with all single-nucleotide variants found on the chromosome(s).
 
 ### Arguments
 **General parameters**
