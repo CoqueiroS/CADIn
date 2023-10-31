@@ -128,6 +128,7 @@ CADIn uses only the reads that map to the input FASTA genome sequence, even if t
 ```
 perl cadin -i FILE.bam -r REFERENCE.fasta -a ANNOTATION.gff
 ```
+*`Sample test files can bed downloaded via link`*
 
 ### Results
 The standard output of the CADIn is divided in 2 folders.
