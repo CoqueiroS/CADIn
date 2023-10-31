@@ -144,6 +144,8 @@ The standard output of the CADIn is divided in 2 folders.
 	- *depth-Normalized*
 		- Table with normalized depth values of each gene after Grubb's test. Genes with discrepant values are removed from this table.
 		- Columns: [COD] Sample name. [CHR] Chromosome location of the gene. [DEP] Normalized median number of reads for each position of the gene. Normalization are performed with the depth of the sample. [ID] Gene ID as reported in the gff file.
+	- *pairwise-Test.txt*
+		- Text with pairwise-test chromosomes values
 	- *wilcoxon-signed-Rank.csv*
 		- Chromosomal somy variation statistical validation, with the Mann-Whitney-Wilcoxon tests.
 		- Columns: [library] Which sample is represented. [chromosome] Chromosome analyzed. [p_less/grater_”n”] P-value of Mann-Whitney-Wilcoxon test for values less /greater than “n”. [mean] Average of the normalized value of genes in chromosome for each sample. [median] Median of the normalized value of genes in chromosome for each sample. [sd] Standard derivation of the normalized value of genes in chromosome for each sample.	
